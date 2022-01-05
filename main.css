@@ -1,25 +1,44 @@
 :root {
-  --main-col: #d1e0ff;
+  --main-col: hsl(218, 100%, 98%);
 }
 
 body {
   /* background-image: url(./me.png);
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-color: var(--main-col); */
+  background-size: 100%; */
+  background-color: var(--main-col);
+
+  margin: 0%;
+  padding: 0%;
 }
 
 .nav {
-  float: right;
   position: sticky;
   top: 0%;
-  height: 5vh;
+}
+
+.nav-item {
+  display: inline;
+}
+
+.nav-item:hover {
+  background-color: blue;
+}
+
+.nav-links {
+  float: right;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  margin: 20px;
 }
 
 .title-container {
   position: absolute;
   top: 10vh;
-  background-color: white;
+  /* background-color: white; */
   width: fit-content;
   padding: 0%;
   margin: 0%;
