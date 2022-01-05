@@ -1,0 +1,39 @@
+:root {
+  --main-col: #d1e0ff;
+}
+
+body {
+  /* background-image: url(./me.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: var(--main-col); */
+}
+
+.nav {
+  float: right;
+  position: sticky;
+  top: 0%;
+  height: 5vh;
+}
+
+.title-container {
+  position: absolute;
+  top: 10vh;
+  background-color: white;
+  width: fit-content;
+  padding: 0%;
+  margin: 0%;
+}
+
+#title {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.footer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  text-align: center;
+}
