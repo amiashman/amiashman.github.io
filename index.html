@@ -26,14 +26,23 @@
         <a class="nav-link" href="/about/">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/contact/">Contact</a>
+        <a
+          class="nav-link disabled"
+          href="/contact/"
+          title="This page is currently disabled"
+          >Contact</a
+        >
       </li>
     </ul>
     <main>
       <div class="container mt-4">
         <div class="row" id="intro">
           <div class="col-xs col-sm-5">
-            <img src="/images/me.png" alt="" class="img-fluid" />
+            <img
+              src="/assets/images/myself/me-home.png"
+              alt=""
+              class="img-fluid"
+            />
           </div>
           <div class="w-100 d-xs-block d-sm-none"></div>
           <div class="col-xs col-sm-7">
@@ -41,7 +50,7 @@
               <span class="h1">Hi!</span>
               <br />
               My name is Ami and I like to make stuff. Games, animations,
-              libraries, whatever. Just trying to have some fun.
+              whatever. Just trying to have some fun.
               <br />
               <br />
               Check out the stuff I've made.
@@ -70,14 +79,29 @@
             <a
               href="/stuff/memorymatch/"
               class="project-link"
+              id="memorymatch"
               rel="noopener noreffer"
               ><li class="project">
                 <img
-                  src="/images/previews/memorymatch.png"
+                  src="/assets/images/previews/memorymatch.png"
                   alt="Memory Match"
-                  class="project-image"
+                  class="project-image rounded img-fluid"
                 />
                 <p class="project-title">Memory Match</p>
+              </li>
+            </a>
+            <a
+              href="/stuff/fifteenpuzzle/"
+              class="project-link"
+              id="fifteenpuzzle"
+              rel="noopener noreffer"
+              ><li class="project">
+                <img
+                  src="/assets/images/previews/fifteenpuzzle.png"
+                  alt="15 Puzzle"
+                  class="project-image rounded img-fluid"
+                />
+                <p class="project-title">15 Puzzle</p>
               </li>
             </a>
           </ul>

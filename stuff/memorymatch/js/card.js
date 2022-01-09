@@ -32,8 +32,10 @@ class Card {
   assign() {
     let choiceNumber = Math.floor(Math.random() * cards.length);
     this.choice = cards[choiceNumber];
+    console.log(cards);
     cards.splice(choiceNumber, 1);
     this.data = cardLayouts[this.choice];
+    console.log(this.i, this.j, cards, choiceNumber, this.choice, this.data);
   }
 
   reveal() {
@@ -47,6 +49,14 @@ function lockGrid() {
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
       grid[i][j].locked = !grid[i][j].locked;
+    }
+  }
+}
+
+function revealAll() {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      grid[i][j].revealed = true;
     }
   }
 }

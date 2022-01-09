@@ -15,8 +15,8 @@ let cols = parseInt(urlParams.get("cols"), 10) || 6;
 let rows = parseInt(urlParams.get("rows"), 10) || 6;
 const w = 50;
 const h = 70;
-let grid = make2DArray(cols, rows);
-let cards = new Array(cols * rows);
+let grid;
+let cards;
 
 let storage = [];
 let turnCount = 0;
@@ -26,13 +26,20 @@ let footerHeight = 150;
 
 let firstGuess = true;
 
+let madeEven;
+let madeEvenCount = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight - footerHeight);
 
   if ((cols * rows) % 2 == 1) {
     cols = cols - (cols % 2);
     rows = rows - (rows % 2);
+    madeEven = true;
   }
+
+  grid = make2DArray(cols, rows);
+  cards = new Array(cols * rows);
 
   for (let i = 0; i < cards.length; i++) {
     cards[i] = Math.floor(i / 2);
@@ -85,6 +92,24 @@ function draw() {
       0
     );
   }
+
+  if (madeEven) {
+    noStroke();
+    fill(0);
+    textAlign(LEFT, LEFT);
+    let ts = 16;
+    textSize(ts);
+    text(
+      "Please note that the number of cards was changed to ensure an even amount of cards",
+      -width / 2 + ts / 2,
+      height / 2 - ts
+    );
+    madeEvenCount++;
+  }
+
+  if (madeEvenCount > 250) {
+    madeEven = false;
+  }
 }
 
 function mousePressed() {
@@ -98,9 +123,12 @@ function mousePressed() {
   i = Math.round(i);
   j = Math.round(j);
   console.log(i, j);
-  grid[i][j].reveal();
-  if (storage.length < 2) {
-    storage.push(grid[i][j]);
+  if (!grid[i][j].guessed) {
+    grid[i][j].reveal();
+
+    if (storage.length < 2) {
+      storage.push(grid[i][j]);
+    }
   }
   if (storage.length == 2) {
     lockGrid();
