@@ -87,7 +87,7 @@ body {
   padding: 1em;
 }
 
-#heading {
+#menu-heading {
   margin-top: 0px;
 }
 
@@ -116,4 +116,22 @@ body {
 
 #cancel-btn {
   background-color: #e74c3c;
+}
+
+.menu-footer {
+  margin-bottom: 0px;
+  font-size: 0.9em;
+  color: #000000;
+}
+
+.menu-link {
+  color: #000000;
+}
+
+#credit {
+  margin-bottom: 0.25em;
+}
+
+#date {
+  margin: 0px;
 }
