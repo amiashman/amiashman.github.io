@@ -11,6 +11,61 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="menu">
+      <div class="menu-content">
+        <p class="menu-text" id="heading">
+          Adjust the sliders to set the size of the game:
+        </p>
+        <div class="sliders">
+          <div class="slider" id="cols-slider">
+            <label for="cols">Columns: <span id="cols-value">6</span></label>
+            <br />
+            <input
+              class="menu-input"
+              type="range"
+              name="cols"
+              id="cols-input"
+              min="4"
+              max="10"
+              value="6"
+            />
+          </div>
+          <br />
+          <div class="slider" id="rows-slider">
+            <label for="rows">Rows: <span id="rows-value">6</span></label>
+            <br />
+            <input
+              class="menu-input"
+              type="range"
+              name="rows"
+              id="rows-input"
+              min="4"
+              max="10"
+              value="6"
+            />
+          </div>
+          <br />
+        </div>
+        <div class="buttons">
+          <button
+            type="submit"
+            class="menu-btn"
+            id="play-btn"
+            onclick="loadNewGame()"
+          >
+            Play
+          </button>
+          <button
+            type="submit"
+            class="menu-btn"
+            id="cancel-btn"
+            onclick="cancelMenu()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
     <footer id="footer">
       <div class="footer-item" id="footer-item-1">
         <div class="item-display">
@@ -31,15 +86,15 @@
         <p class="item-label">Accuracy</p>
       </div>
       <div class="settings">
-        <div class="icon black">
-          <i class="fas fa-cog black"></i>
+        <div class="icon">
+          <i class="fas fa-cog" id="settingsIcon"></i>
         </div>
       </div>
     </footer>
-    <div class="menu"></div>
     <script src="./js/sketch.js"></script>
     <script src="./js/card.js"></script>
     <script src="./js/cardLayouts.js"></script>
     <script src="./js/drawFooter.js"></script>
+    <script src="./js/menu.js"></script>
   </body>
 </html>

@@ -65,8 +65,55 @@ body {
   padding: 0.5em;
   border-radius: 50%;
   transition: transform 0.7s ease-in-out;
+  cursor: pointer;
 }
 
 .icon:hover {
   transform: rotate(180deg);
+}
+
+#menu {
+  display: none;
+  position: absolute;
+  top: calc(50% - var(--size) / 2);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #b6b6b6;
+  text-align: center;
+  border-radius: 1em;
+}
+
+.menu-content {
+  padding: 1em;
+}
+
+#heading {
+  margin-top: 0px;
+}
+
+.menu-input {
+  cursor: pointer;
+}
+
+.buttons {
+  width: 100%;
+}
+
+.menu-btn {
+  margin: 0px;
+  text-decoration: none;
+  border: none;
+  color: white;
+  padding: 0.5em;
+  font-size: 1.2em;
+  width: 49%;
+  cursor: pointer;
+}
+
+#play-btn {
+  background-color: #2ecc71;
+}
+
+#cancel-btn {
+  background-color: #e74c3c;
 }

@@ -8,8 +8,10 @@ function make2DArray(cols, rows) {
   return arr; // return the arr
 }
 
-urlQuery = window.location.search;
-urlParams = new URLSearchParams(urlQuery);
+let urlQuery = window.location.search;
+let urlParams = new URLSearchParams(urlQuery);
+
+let menuOpen = false;
 
 let cols = parseInt(urlParams.get("cols"), 10) || 6;
 let rows = parseInt(urlParams.get("rows"), 10) || 6;
@@ -86,7 +88,7 @@ function draw() {
     textSize(24);
     text(
       "Congratulations! You won in " +
-        (s - 1) +
+        s +
         " seconds.\nPlease refresh the browser to play again.",
       0,
       0
@@ -113,45 +115,47 @@ function draw() {
 }
 
 function mousePressed() {
-  if (firstGuess) {
-    showTime();
-    firstGuess = false;
-  }
-
-  i = (cols - 1) / 2 + (mouseX - width / 2) / w;
-  j = (rows - 1) / 2 + (mouseY - height / 2) / h;
-  i = Math.round(i);
-  j = Math.round(j);
-  console.log(i, j);
-  if (!grid[i][j].guessed) {
-    grid[i][j].reveal();
-
-    if (storage.length < 2) {
-      storage.push(grid[i][j]);
+  if (!menuOpen) {
+    i = (cols - 1) / 2 + (mouseX - width / 2) / w;
+    j = (rows - 1) / 2 + (mouseY - height / 2) / h;
+    if (firstGuess && i > 0 && i < cols && j > 0 && j < rows) {
+      showTime();
+      firstGuess = false;
     }
-  }
-  if (storage.length == 2) {
-    lockGrid();
-    let timeOut = setTimeout(() => {
-      lockGrid();
-      turnCount++;
-      if (
-        storage[0].data == storage[1].data &&
-        storage[0].index != storage[1].index &&
-        !storage[0].guessed &&
-        !storage[1].guessed
-      ) {
-        for (card of storage) {
-          card.guessed = !card.guessed;
-        }
-        console.log("match");
-        matchCount++;
-      } else {
-        for (card of storage) {
-          card.revealed = !card.revealed;
-        }
+
+    i = Math.round(i);
+    j = Math.round(j);
+    console.log(i, j);
+    if (!grid[i][j].guessed) {
+      grid[i][j].reveal();
+
+      if (storage.length < 2) {
+        storage.push(grid[i][j]);
       }
-      storage = [];
-    }, 500);
+    }
+    if (storage.length == 2) {
+      lockGrid();
+      let timeOut = setTimeout(() => {
+        lockGrid();
+        turnCount++;
+        if (
+          storage[0].data == storage[1].data &&
+          storage[0].index != storage[1].index &&
+          !storage[0].guessed &&
+          !storage[1].guessed
+        ) {
+          for (card of storage) {
+            card.guessed = !card.guessed;
+          }
+          console.log("match");
+          matchCount++;
+        } else {
+          for (card of storage) {
+            card.revealed = !card.revealed;
+          }
+        }
+        storage = [];
+      }, 500);
+    }
   }
 }

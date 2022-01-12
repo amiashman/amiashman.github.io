@@ -11,11 +11,14 @@ function showMovesAndAccuracy() {
   }
 }
 
-let s = 0;
+let s = -1;
 let timeOut;
 function showTime() {
+  if (!menuOpen) {
+    s++;
+  }
   m = (s - (s % 60)) / 60;
   time.innerText = m + ":" + nf(s % 60, 2);
-  s++;
+
   timeOut = setTimeout(showTime, 1000);
 }
