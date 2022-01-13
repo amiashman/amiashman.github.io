@@ -83,3 +83,36 @@ body {
 .footer-text {
   margin-bottom: 0px;
 }
+
+#fibonacci {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: none;
+  position: absolute;
+}
+
+#exit-icon {
+  position: absolute;
+  width: 100%;
+}
+
+#icon {
+  float: right;
+  padding: 0.25em;
+  color: #bb0000;
+  border-radius: 50%;
+  transition: transform 0.7s ease-in-out;
+  cursor: pointer;
+}
+
+#icon:hover {
+  transform: rotate(360deg);
+}
+
+@keyframes fade-fibonacci {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
