@@ -26,21 +26,22 @@ let timeBox;
 let minutes;
 let seconds;
 
+let footerHeight = 150;
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - footerHeight);
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       cells[r][c] = new Cell(r, c, w);
     }
   }
 
-  moveBox = new TextBox(w * -1, w * 2.5, w);
-  timeBox = new TextBox(w, w * 2.5, w);
+  showTime();
 }
 
 function draw() {
   background(149, 165, 166);
-  translate(width / 2, height / 2);
+  translate(width / 2, height / 2 + footerHeight / 3);
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
@@ -65,53 +66,36 @@ function draw() {
     pop();
     console.log("solved");
   }
-
-  moveBox.show("Moves: " + moveCounter);
-
-  if (gridLocked == false) {
-    let time = Math.floor((millis() - 700) / 1000);
-    if (time < 0) time = 0;
-    minutes = Math.floor(time / 60);
-    seconds = time % 60;
-    if (seconds < 10) seconds = "0" + seconds;
-  }
-  timeBox.show("Time: " + minutes + ":" + seconds);
 }
 
 function keyPressed(e) {
   if (!gridLocked) {
-    if (e.which == 83) {
-      scramblePuzzle();
-    } else {
-      let blankCell = findBlankCell();
-      switch (e.which) {
-        case 37:
-          if (blankCell.c != 3) {
-            swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c + 1);
-            moveCounter++;
-          }
-          break;
-        case 38:
-          if (blankCell.r != 3) {
-            swapPieces(blankCell.r, blankCell.c, blankCell.r + 1, blankCell.c);
-            moveCounter++;
-          }
-          break;
-        case 39:
-          if (blankCell.c != 0) {
-            swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c - 1);
-            moveCounter++;
-          }
-          break;
-        case 40:
-          if (blankCell.r != 0) {
-            swapPieces(blankCell.r, blankCell.c, blankCell.r - 1, blankCell.c);
-            moveCounter++;
-          }
-          break;
-      }
+    let blankCell = findBlankCell();
+    switch (e.which) {
+      case 37:
+        if (blankCell.c != 3) {
+          swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c + 1);
+        }
+        break;
+      case 38:
+        if (blankCell.r != 3) {
+          swapPieces(blankCell.r, blankCell.c, blankCell.r + 1, blankCell.c);
+        }
+        break;
+      case 39:
+        if (blankCell.c != 0) {
+          swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c - 1);
+        }
+        break;
+      case 40:
+        if (blankCell.r != 0) {
+          swapPieces(blankCell.r, blankCell.c, blankCell.r - 1, blankCell.c);
+        }
+        break;
     }
+    moveCounter++;
 
+    updateMoves();
     checkPuzzle();
   }
 }
