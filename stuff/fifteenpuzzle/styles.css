@@ -15,7 +15,7 @@ body {
   top: calc(100% - var(--size));
   width: 100%;
   height: var(--size);
-  background-color: #b6b6b6;
+  background-color: rgb(149, 165, 166);
 }
 
 .footer-item {
