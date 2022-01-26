@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="/assets/fibonacci/fibonacci.css" />
   </head>
   <body>
     <ul class="nav justify-content-end">
@@ -30,7 +31,7 @@
       </li>
     </ul>
     <div class="container">
-      <div id="fibonacci" class=" col-12 col-sm-6 col-md-4">
+      <div id="fibonacci" class="col-12 col-sm-6 col-md-4">
         <div class="card">
           <div id="exit-icon">
             <i class="far fa-times-circle" id="icon"></i>
@@ -41,10 +42,17 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">n =</span>
               </div>
-              <input type="number" class="form-control" id="fib-input" onchange="findFibNumber()">
-            </div>         
-            <hr>
-            <p class="card-text">The n-th Fibonacci number is: <span id="fib-output"></span></p>
+              <input
+                type="number"
+                class="form-control"
+                id="fib-input"
+                onchange="findFibNumber()"
+              />
+            </div>
+            <hr />
+            <p class="card-text">
+              The n-th Fibonacci number is: <span id="fib-output"></span>
+            </p>
           </div>
         </div>
       </div>
@@ -57,6 +65,7 @@
             alt=""
             class="img-fluid"
           />
+        </div>
       </div>
       <div class="row">
         <h1 class="text-center">About</h1>
@@ -64,33 +73,85 @@
       <div class="row">
         <h4>Who Am I?</h4>
         <p class="text-left font-weight-normal" style="font-size: 1.2rem">
-          This is me. I'm a highschool student from Baltimore, Maryland, who loves to code. I plan on making it my career after school.
-          <br><br>
-          I learned how to code when I was nine, and my first program was a python script where the computer picked a number between 1 and 1000, and you have to guess it. That progressed into more simple python games, like training your multiplication table or finding the <a href="#" onclick="flyInFibonacci()">n-th Fibonacci number</a>. I then learned HTML, CSS, and JavaScript and made in-browser games.
-          <br><br>
-          I'm an <a href="https://www.16personalities.com/entp-personality">ENTP</a> and a <a href="https://harrypotter.fandom.com/wiki/Gryffindor">Gryffindor</a>. Favorite book is <a href="https://www.goodreads.com/book/show/40961427-1984">1984 by George Orwell</a>. Favorite movie is <a href="https://www.imdb.com/title/tt0119217/" target="_blank" rel="noopener noreferrer">Good Will Hunting</a>. 
+          This is me. I'm a highschool student from Baltimore, Maryland, who
+          loves to code. I plan on making it my career after school.
+          <br /><br />
+          I learned how to code when I was nine, and my first program was a
+          python script where the computer picked a number between 1 and 1000,
+          and you have to guess it. That progressed into more simple python
+          games, like training your multiplication table or finding the
+          <a href="#" onclick="flyInFibonacci()">n-th Fibonacci number</a>. I
+          then learned HTML, CSS, and JavaScript and made in-browser games.
+          <br /><br />
+          I'm an
+          <a href="https://www.16personalities.com/entp-personality">ENTP</a>
+          and a
+          <a href="https://harrypotter.fandom.com/wiki/Gryffindor">Gryffindor</a
+          >. Favorite book is
+          <a href="https://www.goodreads.com/book/show/40961427-1984"
+            >1984 by George Orwell</a
+          >. Favorite movie is
+          <a
+            href="https://www.imdb.com/title/tt0119217/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Good Will Hunting</a
+          >.
         </p>
       </div>
       <div class="row">
         <h4>Contact</h4>
         <p class="text-left font-weight-normal" style="font-size: 1.2rem">
-          Reach out to me! I'd love to hear from you about anything. <a href="mailto:amiashman8@gmail.com">Email me</a>
+          Reach out to me! I'd love to hear from you about anything.
+          <a href="mailto:amiashman8@gmail.com">Email me</a>
         </p>
       </div>
       <div class="row">
         <h4>This Site</h4>
         <p class="text-left font-weight-normal" style="font-size: 1.2rem">
-          This site is made with HTML (obviously). Styling is handled with <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer">Boostrap 5</a>, along with my own CSS styles. Many of the projects on this site are created via the <a href="https://p5js.org/" target="_blank" rel="noopener noreferrer">p5</a> Javascript library and HTML5 canvas. Icons are from <a href="https://fontawesome.com/" target="_blank" rel="noopener noreferrer">fontawesome</a>.
-          <br>
-          <br>
-          This site was hugely inspired by <a href="https://neal.fun/" target="_blank" rel="noopener noreferrer">Neal Agrawal</a>, who inititally inspired me to create a website, and <a href="https://www.bryanbraun.com/" target="_blank" rel="noopener noreferrer">Bryan Braun</a>, who inspired me stylistically and conceptually.
-          <br>
-          <br>
-          All code and other files are avaliable on <a href="https://github.com/amiashman" target="_blank" rel="noopener noreferrer">GitHub</a>. Everything is open source.
+          This site is made with HTML (obviously). Styling is handled with
+          <a
+            href="https://getbootstrap.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Boostrap 5</a
+          >, along with my own CSS styles. Many of the projects on this site are
+          created via the
+          <a href="https://p5js.org/" target="_blank" rel="noopener noreferrer"
+            >p5</a
+          >
+          Javascript library and HTML5 canvas. Icons are from
+          <a
+            href="https://fontawesome.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >fontawesome</a
+          >.
+          <br />
+          <br />
+          This site was hugely inspired by
+          <a href="https://neal.fun/" target="_blank" rel="noopener noreferrer"
+            >Neal Agrawal</a
+          >, who inititally inspired me to create a website, and
+          <a
+            href="https://www.bryanbraun.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Bryan Braun</a
+          >, who inspired me stylistically and conceptually.
+          <br />
+          <br />
+          All code and other files are avaliable on
+          <a
+            href="https://github.com/amiashman"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >. Everything is open source.
         </p>
       </div>
     </div>
-    
+
     <footer class="footer">
       <p class="footer-text">
         Created by
@@ -111,6 +172,6 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script src="/assets/js/fibonacci.js"></script>
+    <script src="/assets/fibonacci/fibonacci.js"></script>
   </body>
 </html>
