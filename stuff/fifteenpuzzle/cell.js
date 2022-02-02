@@ -15,9 +15,9 @@ class Cell {
   show() {
     stroke(149, 165, 166);
     strokeWeight(4);
-    fill(46, 204, 113);
+    fill(wrongColor);
     if (this.r == this.intended.r && this.c == this.intended.c) {
-      fill(230, 126, 34);
+      fill(rightColor);
     }
     if (this.intended.r == 3 && this.intended.c == 3) {
       fill(149, 165, 166);

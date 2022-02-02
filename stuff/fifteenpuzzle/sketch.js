@@ -19,6 +19,12 @@ let gridLocked = false;
 let playAnimation = false;
 let a = 0;
 
+let urlQuery = window.location.search;
+let urlParams = new URLSearchParams(urlQuery);
+
+const wrongColor = "#" + urlParams.get("wrong") || "#2ecc71";
+const rightColor = "#" + urlParams.get("right") || "#e67e22";
+
 let moveBox;
 let moveCounter = 0;
 
