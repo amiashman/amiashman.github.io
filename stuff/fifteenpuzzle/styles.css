@@ -1,5 +1,6 @@
 :root {
   --size: 150px;
+  --bg-color: rgb(149, 165, 166);
 }
 
 html,
@@ -16,7 +17,7 @@ body {
   top: calc(100% - var(--size));
   width: 100%;
   height: var(--size);
-  background-color: rgb(149, 165, 166);
+  background-color: var(--bg-color);
 }
 
 .footer-item {

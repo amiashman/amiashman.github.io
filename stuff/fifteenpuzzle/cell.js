@@ -10,31 +10,23 @@ class Cell {
       r: r,
       c: c
     };
+    this.color = wrongColor;
+    this.textColor = "#ffffff";
   }
 
   show() {
-    stroke(149, 165, 166);
+    stroke(bgColor);
     strokeWeight(4);
-    fill(wrongColor);
-    if (this.r == this.intended.r && this.c == this.intended.c) {
-      fill(rightColor);
-    }
-    if (this.intended.r == 3 && this.intended.c == 3) {
-      fill(149, 165, 166);
-    }
+    fill(this.color);
     rectMode(CENTER);
     rect(this.x, this.y, this.w, this.w, 20);
+
     textAlign(CENTER, CENTER);
     textSize(32);
-    stroke(255);
+    stroke(this.textColor);
     strokeWeight(2);
-    fill(255);
+    fill(this.textColor);
     text(this.number, this.x, this.y);
-    if (this.intended.r == 3 && this.intended.c == 3) {
-      stroke(149, 165, 166);
-      fill(149, 165, 166);
-      rect(this.x, this.y, this.w, this.w, 20);
-    }
   }
 
   update(rnew, cnew) {
@@ -42,5 +34,34 @@ class Cell {
     this.c = cnew;
     this.x = (this.c - 2) * this.w + this.w / 2;
     this.y = (this.r - 2) * this.w + this.w / 2;
+    this.determineColor();
+  }
+
+  determineColor() {
+    if (this.r == this.intended.r && this.c == this.intended.c) {
+      this.color = rightColor;
+    } else if (this.r != this.intended.r || this.c != this.intended.c) {
+      this.color = wrongColor;
+    }
+
+    if (this.getLuminance(this.color) > 186) {
+      this.textColor = "#000000";
+    } else {
+      this.textColor = "#ffffff";
+    }
+
+    if (this.intended.r == 3 && this.intended.c == 3) {
+      this.color = bgColor;
+      this.textColor = bgColor;
+    }
+  }
+
+  getLuminance(hexColor) {
+    hexColor = hexColor.substring(1);
+    let r = parseInt(hexColor.substring(0, 2), 16);
+    let g = parseInt(hexColor.substring(2, 4), 16);
+    let b = parseInt(hexColor.substring(4, 6), 16);
+    let l = r * 0.299 + g * 0.587 + b * 0.114;
+    return l;
   }
 }

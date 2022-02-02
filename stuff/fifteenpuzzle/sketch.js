@@ -22,8 +22,12 @@ let a = 0;
 let urlQuery = window.location.search;
 let urlParams = new URLSearchParams(urlQuery);
 
-const wrongColor = "#" + urlParams.get("wrong") || "#2ecc71";
-const rightColor = "#" + urlParams.get("right") || "#e67e22";
+const wrongColor =
+  urlParams.get("wrong") == null ? "#2ecc71" : "#" + urlParams.get("wrong");
+const rightColor =
+  urlParams.get("wrong") == null ? "#e67e22" : "#" + urlParams.get("right");
+
+const bgColor = "#95a5a6";
 
 let moveBox;
 let moveCounter = 0;
@@ -43,10 +47,12 @@ function setup() {
   }
 
   showTime();
+
+  document.documentElement.style.setProperty("--bg-color", bgColor);
 }
 
 function draw() {
-  background(149, 165, 166);
+  background(bgColor);
   translate(width / 2, height / 2 + footerHeight / 3);
 
   for (let r = 0; r < rows; r++) {
