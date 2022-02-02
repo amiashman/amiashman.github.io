@@ -88,24 +88,27 @@ function keyPressed(e) {
         if (blankCell.c != 3) {
           swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c + 1);
         }
+        moveCounter++;
         break;
       case 38:
         if (blankCell.r != 3) {
           swapPieces(blankCell.r, blankCell.c, blankCell.r + 1, blankCell.c);
         }
+        moveCounter++;
         break;
       case 39:
         if (blankCell.c != 0) {
           swapPieces(blankCell.r, blankCell.c, blankCell.r, blankCell.c - 1);
         }
+        moveCounter++;
         break;
       case 40:
         if (blankCell.r != 0) {
           swapPieces(blankCell.r, blankCell.c, blankCell.r - 1, blankCell.c);
         }
+        moveCounter++;
         break;
     }
-    moveCounter++;
 
     updateMoves();
     checkPuzzle();
