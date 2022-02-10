@@ -61,10 +61,43 @@
         <div class="error">
           <p id="error-message"></p>
         </div>
+        <hr />
+        <div class="theme-selector mb-3">
+          <select
+            class="form-select"
+            id="theme-selector-select"
+            aria-label="Theme selector"
+          >
+            <option value="none" selected>Select a theme</option>
+            <option value="0">Default</option>
+            <option value="1">PaleWave</option>
+            <option value="2">Colorblind</option>
+          </select>
+        </div>
+
+        <hr />
+        <div class="geller-mode">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              name=""
+              id="geller-mode-checkbox"
+              class="form-check-input pointer"
+            />
+            <label
+              for="geller-mode-checkbox"
+              class="form-check-label"
+              id="geller-mode-label"
+            >
+              Geller Mode
+            </label>
+          </div>
+        </div>
+        <hr />
         <div class="buttons">
           <button
             type="submit"
-            class="menu-btn"
+            class="menu-btn pointer"
             id="play-btn"
             onclick="loadNewGame()"
           >
@@ -72,7 +105,7 @@
           </button>
           <button
             type="submit"
-            class="menu-btn"
+            class="menu-btn pointer"
             id="cancel-btn"
             onclick="cancelMenu()"
           >
@@ -107,6 +140,8 @@
         </div>
       </div>
     </footer>
+
+    <script src="./themes.js"></script>
     <script src="./sketch.js"></script>
     <script src="./cell.js"></script>
     <script src="./textbox.js"></script>

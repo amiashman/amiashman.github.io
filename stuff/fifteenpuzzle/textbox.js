@@ -10,7 +10,7 @@ function updateMoves() {
 let s = -1;
 let timeOut;
 function showTime() {
-  if (!gridLocked) {
+  if (!gridLocked && !menuOpen) {
     s++;
   }
   m = (s - (s % 60)) / 60;

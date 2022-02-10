@@ -38,13 +38,19 @@ class Cell {
   }
 
   determineColor() {
-    if (this.r == this.intended.r && this.c == this.intended.c) {
-      this.color = rightColor;
-    } else if (this.r != this.intended.r || this.c != this.intended.c) {
+    if (this.isInCorrectPlace()) {
+      if (gellerMode) {
+        if (this.rightPlaceGeller()) {
+          this.color = rightColor;
+        }
+      } else {
+        this.color = rightColor;
+      }
+    } else if (!this.isInCorrectPlace()) {
       this.color = wrongColor;
     }
 
-    if (this.getLuminance(this.color) > 186) {
+    if (this.getLuminance(this.color) >= 186) {
       this.textColor = "#000000";
     } else {
       this.textColor = "#ffffff";
@@ -56,6 +62,14 @@ class Cell {
     }
   }
 
+  isInCorrectPlace() {
+    if (this.r == this.intended.r && this.c == this.intended.c) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getLuminance(hexColor) {
     hexColor = hexColor.substring(1);
     let r = parseInt(hexColor.substring(0, 2), 16);
@@ -63,5 +77,18 @@ class Cell {
     let b = parseInt(hexColor.substring(4, 6), 16);
     let l = r * 0.299 + g * 0.587 + b * 0.114;
     return l;
+  }
+
+  rightPlaceGeller() {
+    for (let n = this.number - 1; n >= 1; n--) {
+      let testR = Math.floor((n - 1) / 4);
+      let testC = n - (testR * 4 + 1);
+      let testCell = cells[testR][testC];
+
+      if (!testCell.isInCorrectPlace()) {
+        return false;
+      }
+    }
+    return true;
   }
 }

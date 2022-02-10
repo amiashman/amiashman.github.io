@@ -16,18 +16,22 @@ let cells = make2DArray(rows, cols);
 
 let gridLocked = false;
 
-let playAnimation = false;
-let a = 0;
+let victory = false;
 
 let urlQuery = window.location.search;
 let urlParams = new URLSearchParams(urlQuery);
 
 const wrongColor =
-  urlParams.get("wrong") == null ? "#2ecc71" : "#" + urlParams.get("wrong");
+  urlParams.get("wrong") != null ? "#" + urlParams.get("wrong") : "#2ecc71";
+
 const rightColor =
-  urlParams.get("wrong") == null ? "#e67e22" : "#" + urlParams.get("right");
+  urlParams.get("right") != null ? "#" + urlParams.get("right") : "#e67e22";
+
+const gellerMode = urlParams.get("geller") === "true";
 
 const bgColor = "#95a5a6";
+
+let menuOpen = false;
 
 let moveBox;
 let moveCounter = 0;
@@ -65,23 +69,19 @@ function draw() {
     scramblePuzzle();
   }
 
-  if (playAnimation == true) {
-    stroke(0, 0, 255);
-    fill(0, 0, 255);
-    textSize(90);
+  if (victory == true) {
+    stroke("#292d33");
+    strokeWeight(1);
+    fill("#292d33");
+    textSize(24);
     textAlign(CENTER, CENTER);
-    push();
-    angleMode(DEGREES);
-    rotate(a);
-    text("YOU DID IT!!!", 0, 0);
-    a++;
-    pop();
+    text("Congratulations! You've won in " + s + " seconds", 0, w * 2.25);
     console.log("solved");
   }
 }
 
 function keyPressed(e) {
-  if (!gridLocked) {
+  if (!gridLocked && !menuOpen) {
     let blankCell = findBlankCell();
     switch (e.which) {
       case 37:
@@ -152,6 +152,14 @@ function swapPieces(r1, c1, r2, c2) {
 
   cells[r1][c1].update(r1, c1);
   cells[r2][c2].update(r2, c2);
+
+  if (gellerMode) {
+    for (let i = 0; i < 16; i++) {
+      let c = i % 4;
+      let r = (i - c) / 4;
+      cells[r][c].update(r, c);
+    }
+  }
 }
 
 function findBlankCell() {
@@ -185,8 +193,13 @@ function checkPuzzle() {
       }
     }
     if (checker == true) {
-      playAnimation = true;
+      victory = true;
       gridLocked = true;
     }
   }
+}
+
+function processTheme(index) {
+  let selectedTheme = parseInt(urlParams.get("theme"), 10);
+  return themes[selectedTheme][index];
 }
