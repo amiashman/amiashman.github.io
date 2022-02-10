@@ -68,6 +68,10 @@ function loadNewGame() {
     }
   }
 
+  if (gellerBox.checked) {
+    menuSelections.push("geller=true");
+  }
+
   if (!colorIsValid(wrongInput.value) || !colorIsValid(rightInput.value)) {
     error = true;
     invalidColors();
