@@ -122,7 +122,7 @@ function type(e) {
   distanceInFeet = Math.round(distanceInFeet * 100) / 100; // 2 decimals
   feetElem.innerHTML = distanceInFeet;
 
-  let percentage = (distanceInFeet / 30) * 100;
+  let percentage = (distanceInFeet / 300) * 100;
   percentage = Math.round(percentage * 100) / 100; // 2 decimals
   if (percentage > 100) {
     percentage = "100.00";
@@ -136,7 +136,6 @@ function type(e) {
   }
 }
 
-// make this function less readable lol
 function grantReward() {
   document.getElementById("reward-footer").innerHTML =
     "YOU DID IT! Click <a href='./reward.html?rickroll=true'>Here</a> for your reward";

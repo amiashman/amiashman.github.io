@@ -15,9 +15,9 @@ function processQueryParameters() {
   console.log(urlParams);
 }
 
-// also make unreadable
 function grantAuthorization() {
-  //rickroll
   document.getElementsByTagName("body")[0].innerHTML =
     "<img id='rickroll' style = 'position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' src='./reward/reward.gif' width='801' height='600'></img>";
+  document.getElementsByTagName("body")[0].innerHTML +=
+    "<p class='bozo' style = 'position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>BOZO</p>";
 }
