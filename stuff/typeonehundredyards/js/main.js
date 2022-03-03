@@ -124,7 +124,7 @@ function type(e) {
 
   let percentage = (distanceInFeet / 300) * 100;
   percentage = Math.round(percentage * 100) / 100; // 2 decimals
-  if (percentage > 100) {
+  if (percentage > 99.95) {
     percentage = "100.00";
   }
   percentElem.innerHTML = percentage;
