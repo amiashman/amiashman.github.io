@@ -22,11 +22,15 @@ class Planet {
     ellipse(this.pos.x, this.pos.y, this.radius * 2);
   }
 
+  addPlanet(p) {
+    this.planets.push(p);
+  }
+
   addPlanets(ps) {
     console.log(ps);
-    //for (let p in ps) {
-    this.planets = ps;
-    //}
+    ps.forEach((p) => {
+      this.planets.push(p);
+    });
   }
 
   calculateGForce(p) {
@@ -54,7 +58,8 @@ class Planet {
 
     let angle = degrees(Math.atan(Math.abs(dy / dx)));
 
-    return new VectorObject(magnitude, angle, dir);
+    let force = new VectorObject(magnitude, angle, dir);
+    return force;
   }
 
   resultantX(vecs) {
@@ -75,6 +80,27 @@ class Planet {
     });
 
     return finY;
+  }
+
+  showNormalizedForce(forces, dist) {
+    let resX = 0;
+    let resY = 0;
+
+    forces.forEach((force) => {
+      let x = 10 * Math.cos(radians(force.a));
+      if (force.dir.includes("W")) x = -1 * x;
+      resX += x;
+
+      let y = 10 * Math.sin(radians(force.a));
+      if (force.dir.includes("S")) y = -1 * y;
+      resY += y;
+    });
+
+    // resX *= 10;
+    // resY *= 10;
+
+    stroke(this.color);
+    line(this.pos.x, this.pos.y, this.pos.x + resX, this.pos.y + resY);
   }
 
   updateVelX(accX) {
@@ -108,6 +134,8 @@ class Planet {
     this.planets.forEach((planet) => {
       forces.push(this.calculateGForce(planet));
     });
+
+    // this.showNormalizedForce(forces, 10);
 
     this.pos.x += this.updatePosX(this.resultantX(forces));
     this.pos.y += this.updatePosY(this.resultantY(forces));
