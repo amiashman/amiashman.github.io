@@ -58,7 +58,7 @@ function draw() {
       "<br>" +
       "And whenever we fell lonely" +
       "<br>" +
-      "We'll look up and the stars in the sky and remember" +
+      "We'll look up at the stars in the sky and remember" +
       "<br>" +
       "And on the other side of the world, our true love is thinking of us" +
       "<br>" +
