@@ -1,7 +1,7 @@
 const reunion = {
   month: 6,
-  day: 9,
-  hour: 23,
+  day: 10,
+  hour: 6,
   minute: 55,
   second: 0
 };
