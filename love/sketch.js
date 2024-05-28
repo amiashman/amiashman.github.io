@@ -1,11 +1,5 @@
-const reunion = {
-  month: 6,
-  day: 10,
-  hour: 6,
-  minute: 55,
-  second: 0
-};
-let now = {};
+const reunion = 1718006100000;
+let now;
 
 function setup() {
   noCanvas();
@@ -14,30 +8,28 @@ function setup() {
 function draw() {
   removeElements();
   background(255);
-  now = {
-    day: day(),
-    hour: hour(),
-    minute: minute(),
-    second: second()
-  };
+  now = new Date().getTime();
 
-  let remaining = {
-    days: (reunion.day - now.day + 31) % 31,
-    hours: (reunion.hour - now.hour + 24) % 24,
-    minutes: (reunion.minute - now.minute + 60) % 60,
-    seconds: (reunion.second - now.second + 60) % 60
-  };
+  let delta = reunion - now;
+  let days = floor(delta / 86400000);
+  delta = delta - 86400000 * days;
+  let hours = floor(delta / 3600000);
+  delta = delta - 3600000 * hours;
+  let minutes = floor(delta / 60000);
+  delta = delta - 60000 * minutes;
+  let seconds = floor(delta / 1000);
+  delta = delta - 1000 * seconds;
 
   let p = createP(
     "In " +
-      remaining.days +
+      days +
       " days, " +
-      remaining.hours +
+      hours +
       " hours, " +
-      remaining.minutes +
+      minutes +
       " minutes, " +
       "and " +
-      remaining.seconds +
+      seconds +
       " seconds," +
       "<br>" +
       "We'll see each other from afar in the airport" +
