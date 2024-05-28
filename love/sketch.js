@@ -60,7 +60,7 @@ function draw() {
       "<br>" +
       "We'll look up at the stars in the sky and remember" +
       "<br>" +
-      "And on the other side of the world, our true love is thinking of us" +
+      "That on the other side of the world, our true love is thinking of us" +
       "<br>" +
       "Forever and always"
   );
