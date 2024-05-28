@@ -1,5 +1,6 @@
 let blueSystem;
 let redSystem;
+let greenSystem;
 
 let blueSystemParameters = [
   {
@@ -74,8 +75,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   blueSystem = new System(blueSystemParameters, "Blue");
-  redSystem = new System(redSystemParameters, "Red");
-  
+  redSystem = new System(redSystemParameters, "Red");  
 }
 
 function draw() {
