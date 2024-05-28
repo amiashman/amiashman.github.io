@@ -46,7 +46,7 @@ function draw() {
       "<br>" +
       "And it will difficult, and seem undoable at times" +
       "<br>" +
-      "But together, we'll get though it." +
+      "But together, we will get though it." +
       "<br>" +
       "We'll think of each other all the time" +
       "<br>" +
