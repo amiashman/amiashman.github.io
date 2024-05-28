@@ -46,7 +46,7 @@ function draw() {
       "<br>" +
       "And it will difficult, and seem undoable at times" +
       "<br>" +
-      "But together, we will get though it." +
+      "But together, we will get through it." +
       "<br>" +
       "We'll think of each other all the time" +
       "<br>" +
@@ -56,7 +56,7 @@ function draw() {
       "<br>" +
       "Months of absolute happiness, and laughter, and love" +
       "<br>" +
-      "And whenever we fell lonely" +
+      "And whenever we feel lonely" +
       "<br>" +
       "We'll look up at the stars in the sky and remember" +
       "<br>" +
