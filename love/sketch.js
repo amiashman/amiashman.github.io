@@ -1,4 +1,4 @@
-const reunion = 1718006100000;
+const reunion = 1718006100000 - 14400000;
 let now;
 
 function setup() {
