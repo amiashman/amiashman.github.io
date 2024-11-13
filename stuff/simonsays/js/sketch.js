@@ -19,6 +19,7 @@ let turnLength = 3;
 let targetSquence = "";
 let userSequence = "";
 
+let haventStartedYet = true;
 let usersTurn = false;
 
 function setup() {
@@ -61,51 +62,23 @@ function draw() {
 
   fill("#000000");
   ellipse(0, 0, 200, 200);
-}
-
-function playSequence(targetSquence) {
-  usersTurn = false;
-  for (let i = 0; i < targetSquence.length; i++) {
-    const c = targetSquence.charAt(i);
-    switch (c) {
-      case "b":
-        setTimeout(() => {
-          blueIsBright = true;
-        }, 400 * i * 2);
-        setTimeout(() => {
-          blueIsBright = false;
-        }, 400 * i * 2 + 400);
-        break;
-      case "y":
-        setTimeout(() => {
-          yellowIsBright = true;
-        }, 400 * i * 2);
-        setTimeout(() => {
-          yellowIsBright = false;
-        }, 400 * i * 2 + 400);
-        break;
-      case "g":
-        setTimeout(() => {
-          greenIsBright = true;
-        }, 400 * i * 2);
-        setTimeout(() => {
-          greenIsBright = false;
-        }, 400 * i * 2 + 400);
-        break;
-      case "r":
-        setTimeout(() => {
-          redIsBright = true;
-        }, 400 * i * 2);
-        setTimeout(() => {
-          redIsBright = false;
-        }, 400 * i * 2 + 400);
-        break;
-      default:
-        break;
-    }
+  if (haventStartedYet) {
+    stroke(255);
+    fill(255);
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    text("Click to Start", 0, 0);
   }
 
-  usersTurn = true;
+  if (!targetSquence.startsWith(userSequence)) {
+    gameOver();
+  }
+
+  if (userSequence == targetSquence) {
+    userSequence = "";
+    targetSquence += options[floor(random() * options.length)];
+    playSequence(targetSquence);
+  }
 }
 
 function mousePressed() {
@@ -134,6 +107,11 @@ function mousePressed() {
         break;
     }
   }
+
+  if (d < 100 && haventStartedYet) {
+    haventStartedYet = false;
+    playSequence(targetSquence);
+  }
 }
 
 function mouseReleased() {
@@ -141,4 +119,64 @@ function mouseReleased() {
   yellowIsBright = false;
   greenIsBright = false;
   redIsBright = false;
+}
+
+function playSequence(targetSquence) {
+  usersTurn = false;
+  for (let i = 0; i < targetSquence.length; i++) {
+    const c = targetSquence.charAt(i);
+    switch (c) {
+      case "b":
+        setTimeout(() => {
+          blueIsBright = true;
+        }, 400 * i * 2 + 400);
+        setTimeout(() => {
+          blueIsBright = false;
+        }, 400 * (i + 1) * 2);
+        break;
+      case "y":
+        setTimeout(() => {
+          yellowIsBright = true;
+        }, 400 * i * 2 + 400);
+        setTimeout(() => {
+          yellowIsBright = false;
+        }, 400 * (i + 1) * 2);
+        break;
+      case "g":
+        setTimeout(() => {
+          greenIsBright = true;
+        }, 400 * i * 2 + 400);
+        setTimeout(() => {
+          greenIsBright = false;
+        }, 400 * (i + 1) * 2);
+        break;
+      case "r":
+        setTimeout(() => {
+          redIsBright = true;
+        }, 400 * i * 2 + 400);
+        setTimeout(() => {
+          redIsBright = false;
+        }, 400 * (i + 1) * 2);
+        break;
+      default:
+        break;
+    }
+  }
+
+  setTimeout(() => {
+    usersTurn = true;
+  }, 400 * targetSquence.length * 2);
+}
+
+function gameOver() {
+  stroke(255);
+  fill(255);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text(
+    "Game Over!\nScore: " +
+      (targetSquence.length == 3 ? 0 : targetSquence.length - 1),
+    0,
+    0
+  );
 }
