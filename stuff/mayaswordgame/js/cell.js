@@ -12,7 +12,7 @@ class Cell {
 	}
 
 	show() {
-		stroke(255);
+		noStroke();
 		noFill();
 		if (this.selected) {
 			fill(0,0,128);
