@@ -8,6 +8,7 @@ class Cell {
 		this.y = this.j*SCL;
 		this.letter = allLetters.charAt(floor(random(0, allLetters.length)));
 		this.selected = false;
+		this.submitted = false;
 	}
 
 	show() {
@@ -15,6 +16,9 @@ class Cell {
 		noFill();
 		if (this.selected) {
 			fill(0,0,128);
+		}
+		if (this.submitted) {
+			fill(128,128,0);
 		}
 		rect(this.x, this.y, SCL, SCL);
 

@@ -15,8 +15,18 @@ let grid = make2DArray(COLS, ROWS);
 let validSelections = [];
 let begunWord = false;
 let word = "";
+let lettersInWord = [];
 
 let score = 0;
+// 2: 0
+// 3: 1
+// 4: 3
+// 5: 5
+// 6: 7
+// 7: 9   +4
+// 8: 11  +4
+// 9: 13  +4
+
 
 function setup() {
 	createCanvas(COLS * SCL, ROWS * SCL + SCL * 2);
@@ -48,8 +58,9 @@ function mouseClicked() {
 	let i = floor(mouseX / SCL);
 	let j = floor(mouseY / SCL);
 	console.log(i,j)
-	if ((!begunWord || validSelections.includes(i + "," + j)) && !grid[i][j].selected) {
+	if ((!begunWord || validSelections.includes(i + "," + j)) && !grid[i][j].selected && !grid[i][j].submitted) {
 		grid[i][j].clicked();
+		lettersInWord.push([i,j]);
 		begunWord = true;
 		validSelections = grid[i][j].neighbors();
 	}
@@ -57,10 +68,18 @@ function mouseClicked() {
 
 function keyPressed() {
 	if (key === "Enter") {
-		if (allWords.includes(word.toLowerCase())) {
-			begunWord = false;
-			score += word.length;
-			word = "";
-		} else {}
+		if (word.length > 2 && allWords.includes(word.toLowerCase())) {
+			console.log(word);
+			lettersInWord.forEach(cell => {
+				grid[cell[0]][cell[1]].submitted = true;
+			});
+			score += (1 + (word.length - 3) * 2) + (word.length >= 7 ? 4 : 0);
+		} 
+		begunWord = false;
+		lettersInWord.forEach(cell => {
+			grid[cell[0]][cell[1]].selected = false;
+		});
+		word = "";
+		lettersInWord = [];
 	}
 }
