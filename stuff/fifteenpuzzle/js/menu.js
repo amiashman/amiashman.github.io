@@ -12,7 +12,7 @@ function flyMenu() {
 let wrongInput = document.getElementById("wrong-input");
 let rightInput = document.getElementById("right-input");
 let errorMessage = document.getElementById("error-message");
-let gellerBox = document.getElementById("geller-mode-checkbox");
+// let gellerBox = document.getElementById("geller-mode-checkbox");
 let themeSelect = document.getElementById("theme-selector-select");
 
 wrongInput.placeholder = wrongColor;
@@ -68,9 +68,9 @@ function loadNewGame() {
     }
   }
 
-  if (gellerBox.checked) {
-    menuSelections.push("geller=true");
-  }
+  // if (gellerBox.checked) {
+  //   menuSelections.push("geller=true");
+  // }
 
   if (!colorIsValid(wrongInput.value) || !colorIsValid(rightInput.value)) {
     error = true;

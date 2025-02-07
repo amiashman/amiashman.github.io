@@ -21,9 +21,13 @@ let userSequence = "";
 
 let haventStartedYet = true;
 let usersTurn = false;
+let isGameOver = false;
+
+let width = 500;
+let height = 500;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
 
   for (let i = 0; i < turnLength; i++) {
     targetSquence += options[floor(random() * options.length)];
@@ -32,7 +36,7 @@ function setup() {
 
 function draw() {
   background(0);
-  translate(width / 2, height / 2);
+  translate(windowWidth / 2, windowHeight / 2);
 
   noStroke();
 
@@ -40,28 +44,28 @@ function draw() {
   if (blueIsBright) {
     fill(brightBlue);
   }
-  arc(0, 0, 400, 400, 0, PI / 2);
+  arc(0, 0, width, height, 0, PI / 2);
 
   fill(yellow);
   if (yellowIsBright) {
     fill(brightYellow);
   }
-  arc(0, 0, 400, 400, PI / 2, PI);
+  arc(0, 0, width, height, PI / 2, PI);
 
   fill(green);
   if (greenIsBright) {
     fill(brightGreen);
   }
-  arc(0, 0, 400, 400, PI, (3 * PI) / 2);
+  arc(0, 0, width, height, PI, (3 * PI) / 2);
 
   fill(red);
   if (redIsBright) {
     fill(brightRed);
   }
-  arc(0, 0, 400, 400, (3 * PI) / 2, 0);
+  arc(0, 0, width, height, (3 * PI) / 2, 0);
 
   fill("#000000");
-  ellipse(0, 0, 200, 200);
+  ellipse(0, 0, width / 2, height / 2);
   if (haventStartedYet) {
     stroke(255);
     fill(255);
@@ -85,7 +89,7 @@ function mousePressed() {
   let x = mouseX - width / 2;
   let y = mouseY - height / 2;
   let d = abs(dist(x, y, 0, 0));
-  if (d >= 100 && d <= 200 && usersTurn) {
+  if (d >= 100 && d <= 200 && usersTurn && !isGameOver) {
     switch (true) {
       case x >= 0 && y >= 0: // blue
         blueIsBright = true;
@@ -108,7 +112,7 @@ function mousePressed() {
     }
   }
 
-  if (d < 100 && haventStartedYet) {
+  if (haventStartedYet) {
     haventStartedYet = false;
     playSequence(targetSquence);
   }
