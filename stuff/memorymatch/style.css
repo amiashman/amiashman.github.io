@@ -68,10 +68,6 @@ body {
   cursor: pointer;
 }
 
-.icon:hover {
-  transform: rotate(180deg);
-}
-
 #menu {
   display: none;
   position: absolute;
