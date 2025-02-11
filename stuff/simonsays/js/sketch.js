@@ -73,9 +73,37 @@ function draw() {
     textAlign(CENTER, CENTER);
     text("Click to Start", 0, 0);
   }
+	
+	if (!isGameOver) {
+		if (usersTurn) {
+  	  stroke(255);
+  	  fill(255);
+  	  textSize(32);
+  	  textAlign(CENTER, CENTER);
+  	  text("Your Turn!", 0, 0);
+  	}
+
+		if (!usersTurn && !haventStartedYet) {
+  	  stroke(255);
+  	  fill(255);
+  	  textSize(32);
+  	  textAlign(CENTER, CENTER);
+  	  text("Watch...", 0, 0);
+  	}
+}
 
   if (!targetSquence.startsWith(userSequence)) {
-    gameOver();
+		stroke(255);
+  	fill(255);
+  	textSize(32);
+  	textAlign(CENTER, CENTER);
+  	text(
+  	  "Game Over!\nScore: " +
+  	    (targetSquence.length == 3 ? 0 : targetSquence.length - 1),
+  	  0,
+  	  0
+  	);
+		isGameOver = true;
   }
 
   if (userSequence == targetSquence) {
@@ -86,8 +114,8 @@ function draw() {
 }
 
 function mousePressed() {
-  let x = mouseX - width / 2;
-  let y = mouseY - height / 2;
+  let x = mouseX - windowWidth / 2;
+  let y = mouseY - windowHeight / 2;
   let d = abs(dist(x, y, 0, 0));
 	console.log(d);
   if (d >= width / 4 && d <= width / 2 && usersTurn && !isGameOver) {
@@ -171,17 +199,4 @@ function playSequence(targetSquence) {
   setTimeout(() => {
     usersTurn = true;
   }, 400 * targetSquence.length * 2);
-}
-
-function gameOver() {
-  stroke(255);
-  fill(255);
-  textSize(32);
-  textAlign(CENTER, CENTER);
-  text(
-    "Game Over!\nScore: " +
-      (targetSquence.length == 3 ? 0 : targetSquence.length - 1),
-    0,
-    0
-  );
 }
