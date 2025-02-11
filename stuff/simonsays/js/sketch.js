@@ -89,7 +89,8 @@ function mousePressed() {
   let x = mouseX - width / 2;
   let y = mouseY - height / 2;
   let d = abs(dist(x, y, 0, 0));
-  if (d >= 100 && d <= 200 && usersTurn && !isGameOver) {
+	console.log(d);
+  if (d >= width / 4 && d <= width / 2 && usersTurn && !isGameOver) {
     switch (true) {
       case x >= 0 && y >= 0: // blue
         blueIsBright = true;
