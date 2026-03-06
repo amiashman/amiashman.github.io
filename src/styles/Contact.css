@@ -1,0 +1,109 @@
+.contact {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.contact h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.contact-intro {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-links a {
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc;
+  transition: border-color 0.2s;
+}
+
+.contact-links a:hover {
+  border-color: #1a1a1a;
+}
+
+.contact-dot {
+  color: #ccc;
+}
+
+.contact-divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.form-btn {
+  align-self: flex-start;
+  padding: 0.7rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: #1a1a1a;
+  color: #fafafa;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.form-btn:hover {
+  opacity: 0.85;
+}
+
+.contact-success {
+  font-size: 1rem;
+  color: #333;
+  padding: 1.5rem;
+  background: #f0f0f0;
+  border-radius: 6px;
+  text-align: center;
+}
