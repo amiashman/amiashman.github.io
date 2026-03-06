@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../styles/Navbar.css";
 import type { PageMapping } from "../assets/types";
 
 export default function Navbar({ pages }: { pages: PageMapping }) {

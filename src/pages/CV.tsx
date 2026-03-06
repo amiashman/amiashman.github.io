@@ -1,5 +1,3 @@
-import "../styles/cv.css";
-
 export default function CV() {
   return (
     <main className="cv">
