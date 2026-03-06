@@ -1,3 +1,5 @@
+import "../styles/UnderConstruction.css";
+
 export default function UnderConstruction() {
   return (
     <main className="construction">

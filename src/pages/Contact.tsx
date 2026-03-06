@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/Contact.css";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -63,7 +64,7 @@ export default function Contact() {
             <label htmlFor="message">Message</label>
             <textarea id="message" name="message" rows={5} required />
           </div>
-          <button type="submit" className="form-btn">
+          <button type="submit" className="btn form-btn">
             Send Message
           </button>
         </form>

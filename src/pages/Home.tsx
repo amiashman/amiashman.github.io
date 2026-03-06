@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../styles/Home.css";
 
 export default function Home() {
   return (
@@ -15,10 +16,10 @@ export default function Home() {
         This website is a work in progress. Check back soon for updates!
       </p>
       <div className="home-links">
-        <Link to="/projects" className="home-btn">
+        <Link to="/projects" className="btn">
           View Projects
         </Link>
-        <Link to="/contact" className="home-btn home-btn-outline">
+        <Link to="/contact" className="btn btn-outline">
           Get in Touch
         </Link>
       </div>
