@@ -1,23 +1,25 @@
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
-import type { PageMapping } from "../assets/types";
 
-export default function Navbar({ pages }: { pages: PageMapping }) {
+export default function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-name">
         Ami Ashman
       </Link>
       <div className="navbar-links">
-        {Object.keys(pages).map((page) => (
-          <Link
-            key={page.toLowerCase()}
-            to={`/${page.toLowerCase()}`}
-            className="navbar-link"
-          >
-            {page}
-          </Link>
-        ))}
+        <Link to="/about" className="navbar-link">
+          About
+        </Link>
+        <Link to="/cv" className="navbar-link">
+          CV
+        </Link>
+        <Link to="/projects" className="navbar-link">
+          Projects
+        </Link>
+        <Link to="/contact" className="navbar-link">
+          Contact
+        </Link>
       </div>
     </nav>
   );
