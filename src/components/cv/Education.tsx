@@ -1,5 +1,5 @@
 import type { EducationProps } from "../../assets/types";
-import "../../styles/cv.css";
+import "../../pages/CV.css";
 
 export default function Education({
   school,

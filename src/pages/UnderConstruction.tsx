@@ -1,4 +1,4 @@
-import "../styles/UnderConstruction.css";
+import "./UnderConstruction.css";
 
 export default function UnderConstruction() {
   return (

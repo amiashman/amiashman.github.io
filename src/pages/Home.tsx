@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../styles/Home.css";
+import "./Home.css";
 
 export default function Home() {
   return (
@@ -9,8 +9,8 @@ export default function Home() {
         Actuarial Science · Artificial Intelligence
       </p>
       <p className="home-intro">
-        Final-year CS student at Northeastern University with a focus in AI,
-        pursueing a career in actuarial science.
+        Final-year CS student at Northeastern University with a focus on AI,
+        pursuing a career in actuarial science.
       </p>
       <p className="home-intro">
         This website is a work in progress. Check back soon for updates!

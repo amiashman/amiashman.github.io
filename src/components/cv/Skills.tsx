@@ -1,5 +1,5 @@
 import type { SkillProps } from "../../assets/types";
-import "../../styles/cv.css";
+import "../../pages/CV.css";
 
 export default function Skills({ languages, areas }: SkillProps) {
   return (

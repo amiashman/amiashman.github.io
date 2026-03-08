@@ -1,4 +1,4 @@
-import "../styles/cv.css";
+import "./cv.css";
 import Exam from "../components/cv/Exam";
 import Education from "../components/cv/Education";
 import Experience from "../components/cv/Experience";

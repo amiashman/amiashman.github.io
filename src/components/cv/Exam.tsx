@@ -1,5 +1,5 @@
 import type { ExamProps } from "../../assets/types";
-import "../../styles/cv.css";
+import "../../pages/CV.css";
 
 export default function Exam({ org, name, date, passedOrSitting }: ExamProps) {
   return (

@@ -1,5 +1,5 @@
 import type { ExperienceProps } from "../../assets/types";
-import "../../styles/cv.css";
+import "../../pages/CV.css";
 
 export default function Experience({
   title,
@@ -13,9 +13,9 @@ export default function Experience({
       <div className="cv-entry-header">
         <h3>{title}</h3>
         <span className="cv-date">
-					{startDate.split(' ').pop() === endDate.split(' ').pop()
-						? `${startDate.split(' ')[0]} - ${endDate}`
-						: `${startDate} - ${endDate}`}
+          {startDate.split(" ").pop() === endDate.split(" ").pop()
+            ? `${startDate.split(" ")[0]} - ${endDate}`
+            : `${startDate} - ${endDate}`}
         </span>
       </div>
       <p className="cv-company">{company}</p>

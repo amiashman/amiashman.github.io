@@ -40,3 +40,9 @@ export type CVProps = {
   skills: SkillProps;
   interests: InterestProps;
 };
+
+export type Project = {
+  id: string;
+  title: string;
+  component: React.ComponentType;
+};
