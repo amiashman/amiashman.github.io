@@ -42,7 +42,7 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
     <div className="yield-curve-input">
       <h3>Yield Curve Rates (%)</h3>
       <div className="rate-inputs">
-        {maturities.map((maturity, index) => (
+        {maturities.map((_maturity, index) => (
           <div key={index} className="rate-input-group">
             <label htmlFor={`rate-${index}`}>{MATURITY_LABELS[index]}</label>
             <input
