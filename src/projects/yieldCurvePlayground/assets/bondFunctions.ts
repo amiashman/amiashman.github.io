@@ -9,43 +9,43 @@ export type Bond = {
 
 export function priceBond(
   bond: Bond,
-  yieldCurve: (maturity: number) => number
+  rateFunc: (maturity: number) => number
 ): number {
   let price = 0;
   const couponPayment =
-    (bond.faceValue * bond.couponRate) / bond.couponFrequency;
+    (bond.faceValue * bond.couponRate) / bond.couponFrequency / 100;
   const totalPeriods = bond.maturity * bond.couponFrequency;
   for (let k = 1; k <= totalPeriods; k++) {
     const t = k / bond.couponFrequency;
-    const spotRate = yieldCurve(t);
+    const spotRate = rateFunc(t) / 100;
     price += couponPayment / Math.pow(1 + spotRate, t);
   }
 
-  const spotRateAtMaturity = yieldCurve(bond.maturity);
+  const spotRateAtMaturity = rateFunc(bond.maturity) / 100;
   price += bond.faceValue / Math.pow(1 + spotRateAtMaturity, bond.maturity);
   return price;
 }
 
 export function macaulayDuration(
   bond: Bond,
-  yieldCurve: (maturity: number) => number
+  rateFunc: (maturity: number) => number
 ): number {
   let duration = 0;
   const couponPayment =
-    (bond.faceValue * bond.couponRate) / bond.couponFrequency;
+    (bond.faceValue * bond.couponRate) / bond.couponFrequency / 100;
   const totalPeriods = bond.maturity * bond.couponFrequency;
 
   for (let k = 1; k <= totalPeriods; k++) {
     const t = k / bond.couponFrequency;
-    const spotRate = yieldCurve(t);
+    const spotRate = rateFunc(t) / 100;
     duration += (t * couponPayment) / Math.pow(1 + spotRate, t);
   }
-  const spotRateAtMaturity = yieldCurve(bond.maturity);
+  const spotRateAtMaturity = rateFunc(bond.maturity) / 100;
   duration +=
     (bond.maturity * bond.faceValue) /
     Math.pow(1 + spotRateAtMaturity, bond.maturity);
 
-  duration /= priceBond(bond, yieldCurve);
+  duration /= priceBond(bond, rateFunc);
   return duration;
 }
 
@@ -56,7 +56,7 @@ export function solveYTM(
   maxIterations: number = 1000
 ): number {
   let low = 0;
-  let high = 1;
+  let high = 100;
 
   for (let i = 0; i < maxIterations; i++) {
     const mid = (low + high) / 2;

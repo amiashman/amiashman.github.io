@@ -3,35 +3,37 @@ import {
   type Bond,
   priceBond,
   macaulayDuration,
-  solveYTM,
-  effectiveDuration,
-  effectiveConvexity
+  solveYTM
+  // effectiveDuration,
+  // effectiveConvexity
 } from "./assets/bondFunctions";
 import { YieldCurve } from "./assets/yieldCurve";
-import PriceYieldChart from "./components/PriceYieldChart";
+import YieldCurveChart from "./components/YieldCurveChart";
+import YieldCurveInputWindow from "./components/YieldCurveInputWindow";
 import "./YieldCurvePlayground.css";
 
-const BASE_CURVE = new YieldCurve({
-  maturities: [0.5, 1, 2, 3, 5, 7, 10],
-  rates: [0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04]
-});
-
 export default function YieldCurvePlayground() {
+  const [baseCurve, setBaseCurve] = useState(
+    new YieldCurve({
+      maturities: "default",
+      rates: new Array(13).fill(5)
+    })
+  );
   const [bond, setBond] = useState<Bond>({
     faceValue: 1000,
-    couponRate: 0.05,
+    couponRate: 5,
     couponFrequency: 2,
     maturity: 10
   });
   const [shiftBps, setShiftBps] = useState(0);
 
-  const curve = BASE_CURVE.addShift(shiftBps / 10000);
+  const curve = baseCurve.addShift(shiftBps / 10000);
   const rateFunc = (t: number) => curve.getRate(t);
 
   const price = priceBond(bond, rateFunc);
   const macDur = macaulayDuration(bond, rateFunc);
-  const effDur = effectiveDuration(bond, curve);
-  const effConv = effectiveConvexity(bond, curve);
+  // const effDur = effectiveDuration(bond, curve);
+  // const effConv = effectiveConvexity(bond, curve);
   const ytm = solveYTM(bond, price);
 
   const updateBond = (field: keyof Bond, value: string) => {
@@ -52,10 +54,18 @@ export default function YieldCurvePlayground() {
       <div className="playground-layout">
         <div className="chart-side">
           <div className="playground-section chart-section">
-            <h2>Price-Yield Relationship</h2>
+            <h2>Yield Curve</h2>
             <div className="chart-container">
-              <PriceYieldChart bond={bond} curve={curve} />
+              <YieldCurveChart curve={curve} />
             </div>
+          </div>
+
+          <div className="playground-section input-section">
+            <h2>Yield Curve Input</h2>
+            <YieldCurveInputWindow
+              curve={baseCurve}
+              onCurveChange={setBaseCurve}
+            />
           </div>
         </div>
 
@@ -64,7 +74,7 @@ export default function YieldCurvePlayground() {
             <h2>Bond Parameters</h2>
             <div className="bond-parameters">
               <div className="parameter-group">
-                <label htmlFor="faceValue">Face Value</label>
+                <label htmlFor="faceValue">Face Value ($)</label>
                 <input
                   id="faceValue"
                   type="number"
@@ -74,7 +84,7 @@ export default function YieldCurvePlayground() {
                 />
               </div>
               <div className="parameter-group">
-                <label htmlFor="couponRate">Coupon Rate</label>
+                <label htmlFor="couponRate">Coupon Rate (%)</label>
                 <input
                   id="couponRate"
                   type="number"
@@ -136,17 +146,17 @@ export default function YieldCurvePlayground() {
                 <div className="metric-label">Macaulay Duration</div>
                 <div className="metric-value">{macDur.toFixed(4)} years</div>
               </div>
-              <div className="metric-item">
+              {/* <div className="metric-item">
                 <div className="metric-label">Effective Duration</div>
                 <div className="metric-value">{effDur.toFixed(4)}</div>
               </div>
               <div className="metric-item">
                 <div className="metric-label">Effective Convexity</div>
                 <div className="metric-value">{effConv.toFixed(4)}</div>
-              </div>
+              </div> */}
               <div className="metric-item">
                 <div className="metric-label">YTM</div>
-                <div className="metric-value">{(ytm * 100).toFixed(4)}%</div>
+                <div className="metric-value">{ytm.toFixed(4)}%</div>
               </div>
             </div>
           </div>

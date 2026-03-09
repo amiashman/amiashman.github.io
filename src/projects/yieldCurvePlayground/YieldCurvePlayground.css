@@ -35,6 +35,7 @@
 .chart-side {
   display: flex;
   flex-direction: column;
+  gap: var(--space-xxl);
 }
 
 .controls-side {
@@ -258,6 +259,56 @@ input[type="range"]::-moz-range-thumb:hover {
 .chart-container svg {
   width: 100%;
   height: auto;
+}
+
+/* Yield Curve Input Section */
+.yield-curve-input h3 {
+  font-size: var(--fs-lg);
+  color: var(--color-muted-dark);
+  margin-bottom: var(--space-lg);
+  font-weight: 600;
+}
+
+.rate-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--space-lg);
+}
+
+.rate-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate-input-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.rate-input-group input[type="number"] {
+  padding: var(--space-md) var(--space-sm);
+  border: 2px solid var(--color-border-light);
+  border-radius: 8px;
+  font-size: var(--fs-md);
+  transition: all 0.3s ease;
+  background-color: var(--color-white);
+  color: var(--color-text);
+  text-align: center;
+  font-weight: 500;
+}
+
+.rate-input-group input[type="number"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.rate-input-group input[type="number"]:hover {
+  border-color: #93c5fd;
 }
 
 /* Responsive Design */

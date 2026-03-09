@@ -1,7 +1,7 @@
 import Spline from "typescript-cubic-spline";
 
 type YieldCurveProps = {
-  maturities: number[];
+  maturities: number[] | "default";
   rates: number[];
 };
 
@@ -11,6 +11,11 @@ export class YieldCurve {
   private curve: Spline;
 
   constructor(props: YieldCurveProps) {
+    if (props.maturities === "default") {
+      props.maturities = [
+        0.083, 0.167, 0.25, 0.333, 0.5, 1, 2, 3, 5, 7, 10, 20, 30
+      ]; // Representing 1 month, 2 month, 3 month, 4 month, 6 month, 1 year, 2 year, 3 year, 5 year, 7 year, 10 year, 20 year, and 30 year maturities
+    }
     if (props.maturities.length !== props.rates.length) {
       throw new Error("Maturities and rates arrays must have the same length");
     }

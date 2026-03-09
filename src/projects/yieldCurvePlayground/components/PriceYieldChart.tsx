@@ -1,3 +1,5 @@
+// This file is deprecated and will be removed in a future update.
+
 import {
   LineChart,
   Line,
