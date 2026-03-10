@@ -25,11 +25,10 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
   const maturities = curve.getMaturities();
   const rates = curve.getRates();
 
-  const handleRateChange = (index: number, newRate: string) => {
-    const numRate = parseFloat(newRate);
-    if (!isNaN(numRate)) {
+  const handleRateChange = (index: number, newRate: number) => {
+    if (!isNaN(newRate)) {
       const newRates = [...rates];
-      newRates[index] = numRate;
+      newRates[index] = newRate;
       const newCurve = new YieldCurve({
         maturities: maturities,
         rates: newRates
@@ -40,7 +39,7 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
 
   return (
     <div className="yield-curve-input">
-      <h3>Yield Curve Rates (%)</h3>
+      <h2>Yield Curve Rates (%)</h2>
       <div className="rate-inputs">
         {maturities.map((_maturity, index) => (
           <div key={index} className="rate-input-group">
@@ -49,12 +48,35 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
               id={`rate-${index}`}
               type="number"
               step={0.01}
-              value={rates[index]}
-              onChange={(e) => handleRateChange(index, e.target.value)}
+              value={rates[index] * 100}
+              onChange={(e) =>
+                handleRateChange(index, parseFloat(e.target.value) / 100)
+              }
             />
           </div>
         ))}
       </div>
+      {/* This is to be worked on.
+			<br />
+      <h2>Presets</h2>
+      <div className="preset-buttons">
+        <button
+          className="preset-button"
+          onClick={() =>
+            onCurveChange(
+              new YieldCurve({
+                maturities: "default",
+                rates: [
+                  0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.055, 0.06,
+                  0.065, 0.07, 0.075, 0.08
+                ]
+              })
+            )
+          }
+        >
+          Normal Upward
+        </button>
+      </div> */}
     </div>
   );
 }

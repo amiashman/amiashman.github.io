@@ -34,7 +34,7 @@ export default function YieldCurveChart({ curve }: Props) {
   // Generate yield curve data
   const curveData = maturities.map((mat) => ({
     maturity: mat.label,
-    yield: parseFloat(curve.getRate(mat.value).toFixed(4))
+    yield: parseFloat((curve.getRate(mat.value) * 100).toFixed(2))
   }));
 
   // Calculate y-axis domain

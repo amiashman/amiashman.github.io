@@ -201,26 +201,6 @@ input[type="range"]::-moz-range-thumb:hover {
   transition: all 0.3s ease;
 }
 
-.metric-item:nth-child(1) {
-  border-left-color: #2563eb;
-}
-
-.metric-item:nth-child(2) {
-  border-left-color: #7c3aed;
-}
-
-.metric-item:nth-child(3) {
-  border-left-color: #10b981;
-}
-
-.metric-item:nth-child(4) {
-  border-left-color: #f59e0b;
-}
-
-.metric-item:nth-child(5) {
-  border-left-color: #ef4444;
-}
-
 .metric-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);

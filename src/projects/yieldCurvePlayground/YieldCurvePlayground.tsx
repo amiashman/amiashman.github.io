@@ -3,25 +3,26 @@ import {
   type Bond,
   priceBond,
   macaulayDuration,
-  solveYTM
-  // effectiveDuration,
-  // effectiveConvexity
+  ytm,
+  modDuration,
+  effectiveConvexity
 } from "./assets/bondFunctions";
 import { YieldCurve } from "./assets/yieldCurve";
 import YieldCurveChart from "./components/YieldCurveChart";
 import YieldCurveInputWindow from "./components/YieldCurveInputWindow";
+import YieldMetricItem from "./components/YieldMetricItem";
 import "./YieldCurvePlayground.css";
 
 export default function YieldCurvePlayground() {
   const [baseCurve, setBaseCurve] = useState(
     new YieldCurve({
       maturities: "default",
-      rates: new Array(13).fill(5)
+      rates: new Array(13).fill(0.05)
     })
   );
   const [bond, setBond] = useState<Bond>({
     faceValue: 1000,
-    couponRate: 5,
+    couponRate: 0.05,
     couponFrequency: 2,
     maturity: 10
   });
@@ -32,9 +33,9 @@ export default function YieldCurvePlayground() {
 
   const price = priceBond(bond, rateFunc);
   const macDur = macaulayDuration(bond, rateFunc);
-  // const effDur = effectiveDuration(bond, curve);
-  // const effConv = effectiveConvexity(bond, curve);
-  const ytm = solveYTM(bond, price);
+  const effDur = modDuration(bond, rateFunc);
+  const effConv = effectiveConvexity(bond, rateFunc);
+  const y = ytm(bond, rateFunc) * 100;
 
   const updateBond = (field: keyof Bond, value: string) => {
     const num = parseFloat(value);
@@ -54,14 +55,13 @@ export default function YieldCurvePlayground() {
       <div className="playground-layout">
         <div className="chart-side">
           <div className="playground-section chart-section">
-            <h2>Yield Curve</h2>
+            <h2>Yield Curve (Effective Annual Rates)</h2>
             <div className="chart-container">
               <YieldCurveChart curve={curve} />
             </div>
           </div>
 
           <div className="playground-section input-section">
-            <h2>Yield Curve Input</h2>
             <YieldCurveInputWindow
               curve={baseCurve}
               onCurveChange={setBaseCurve}
@@ -138,26 +138,31 @@ export default function YieldCurvePlayground() {
           <div className="playground-section">
             <h2>Metrics</h2>
             <div className="metrics-container">
-              <div className="metric-item">
-                <div className="metric-label">Price</div>
-                <div className="metric-value">${price.toFixed(2)}</div>
-              </div>
-              <div className="metric-item">
-                <div className="metric-label">Macaulay Duration</div>
-                <div className="metric-value">{macDur.toFixed(4)} years</div>
-              </div>
-              {/* <div className="metric-item">
-                <div className="metric-label">Effective Duration</div>
-                <div className="metric-value">{effDur.toFixed(4)}</div>
-              </div>
-              <div className="metric-item">
-                <div className="metric-label">Effective Convexity</div>
-                <div className="metric-value">{effConv.toFixed(4)}</div>
-              </div> */}
-              <div className="metric-item">
-                <div className="metric-label">YTM</div>
-                <div className="metric-value">{ytm.toFixed(4)}%</div>
-              </div>
+              <YieldMetricItem
+                label="Price"
+                value={`$${price.toFixed(2)}`}
+                accentColor="#2563eb"
+              />
+              <YieldMetricItem
+                label="Macaulay Duration"
+                value={`${macDur.toFixed(4)} years`}
+                accentColor="#7c3aed"
+              />
+              <YieldMetricItem
+                label="Modified Duration"
+                value={`${effDur.toFixed(4)}`}
+                accentColor="#10b981"
+              />
+              <YieldMetricItem
+                label="Effective Convexity"
+                value={`${effConv.toFixed(4)}`}
+                accentColor="#f59e0b"
+              />
+              <YieldMetricItem
+                label="YTM"
+                value={`${y.toFixed(4)}%`}
+                accentColor="#ef4444"
+              />
             </div>
           </div>
         </div>

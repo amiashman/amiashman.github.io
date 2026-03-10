@@ -7,7 +7,7 @@ type YieldCurveProps = {
 
 export class YieldCurve {
   private maturities: number[];
-  private rates: number[];
+  private rates: number[]; // As decimal
   private curve: Spline;
 
   constructor(props: YieldCurveProps) {
