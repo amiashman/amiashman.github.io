@@ -3,6 +3,7 @@ import { YieldCurve } from "../assets/yieldCurve";
 type Props = {
   curve: YieldCurve;
   onCurveChange: (newCurve: YieldCurve) => void;
+  onPreset: (newShift: number) => void;
 };
 
 const MATURITY_LABELS = [
@@ -21,7 +22,11 @@ const MATURITY_LABELS = [
   "30y"
 ];
 
-export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
+export default function YieldCurveInputWindow({
+  curve,
+  onCurveChange,
+  onPreset
+}: Props) {
   const maturities = curve.getMaturities();
   const rates = curve.getRates();
 
@@ -37,6 +42,30 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
     }
   };
 
+  const handlePreset = (preset: string) => {
+    onPreset(0); // Reset shift to 0 when applying a preset
+    let rateFunc: (m: number) => number;
+    switch (preset) {
+      case "flat":
+        rateFunc = () => 0.04;
+        break;
+      case "normal":
+        rateFunc = (m) => 0.02 + 0.005 * Math.log(m);
+        break;
+      case "inverted":
+        rateFunc = (m) => 0.055 - 0.0034 * Math.log(m);
+        break;
+      default:
+        return;
+    }
+    const newRates: number[] = maturities.map((m) => rateFunc(m), 0);
+    const newCurve = new YieldCurve({
+      maturities: maturities,
+      rates: newRates
+    });
+    onCurveChange(newCurve);
+  };
+
   return (
     <div className="yield-curve-input">
       <h2>Yield Curve Rates (%)</h2>
@@ -48,7 +77,8 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
               id={`rate-${index}`}
               type="number"
               step={0.01}
-              value={rates[index] * 100}
+              min="0"
+              value={(Math.round(rates[index] * 10000) / 100).toFixed(2)}
               onChange={(e) =>
                 handleRateChange(index, parseFloat(e.target.value) / 100)
               }
@@ -56,27 +86,25 @@ export default function YieldCurveInputWindow({ curve, onCurveChange }: Props) {
           </div>
         ))}
       </div>
-      {/* This is to be worked on.
-			<br />
+      <br />
       <h2>Presets</h2>
       <div className="preset-buttons">
+        <button className="preset-button" onClick={() => handlePreset("flat")}>
+          Flat
+        </button>
         <button
           className="preset-button"
-          onClick={() =>
-            onCurveChange(
-              new YieldCurve({
-                maturities: "default",
-                rates: [
-                  0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.055, 0.06,
-                  0.065, 0.07, 0.075, 0.08
-                ]
-              })
-            )
-          }
+          onClick={() => handlePreset("normal")}
         >
-          Normal Upward
+          Normal
         </button>
-      </div> */}
+        <button
+          className="preset-button"
+          onClick={() => handlePreset("inverted")}
+        >
+          Inverted
+        </button>
+      </div>
     </div>
   );
 }

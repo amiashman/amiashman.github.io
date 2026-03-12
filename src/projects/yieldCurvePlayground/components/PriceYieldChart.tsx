@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import {
   priceBond,
-  solveYTM,
+  ytm,
   macaulayDuration,
   type Bond
 } from "../assets/bondFunctions";
@@ -26,7 +26,7 @@ type Props = {
 export default function PriceYieldChart({ bond, curve }: Props) {
   const rateFunc = (t: number) => curve.getRate(t);
   const currentPrice = priceBond(bond, rateFunc);
-  const currentYTM = solveYTM(bond, currentPrice);
+  const currentYTM = ytm(bond, rateFunc);
   const macDur = macaulayDuration(bond, () => currentYTM);
   const modDur = macDur / (1 + currentYTM / bond.couponFrequency);
 

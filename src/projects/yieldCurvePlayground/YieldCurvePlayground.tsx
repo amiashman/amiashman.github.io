@@ -14,7 +14,7 @@ import YieldMetricItem from "./components/YieldMetricItem";
 import "./YieldCurvePlayground.css";
 
 export default function YieldCurvePlayground() {
-  const [baseCurve, setBaseCurve] = useState(
+  const [curve, setCurve] = useState(
     new YieldCurve({
       maturities: "default",
       rates: new Array(13).fill(0.05)
@@ -28,7 +28,11 @@ export default function YieldCurvePlayground() {
   });
   const [shiftBps, setShiftBps] = useState(0);
 
-  const curve = baseCurve.addShift(shiftBps / 10000);
+  const handleShiftChange = (newShift: number) => {
+    setShiftBps(newShift);
+    setCurve((prev) => prev.addShift((newShift - shiftBps) / 10000));
+  };
+
   const rateFunc = (t: number) => curve.getRate(t);
 
   const price = priceBond(bond, rateFunc);
@@ -63,8 +67,9 @@ export default function YieldCurvePlayground() {
 
           <div className="playground-section input-section">
             <YieldCurveInputWindow
-              curve={baseCurve}
-              onCurveChange={setBaseCurve}
+              curve={curve}
+              onCurveChange={setCurve}
+              onPreset={handleShiftChange}
             />
           </div>
         </div>
@@ -129,7 +134,9 @@ export default function YieldCurvePlayground() {
                 min={-300}
                 max={300}
                 value={shiftBps}
-                onChange={(e) => setShiftBps(parseInt(e.target.value))}
+                onChange={(e) => {
+                  handleShiftChange(parseInt(e.target.value));
+                }}
               />
               <span className="shift-range positive">+300 bps</span>
             </div>
