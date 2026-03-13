@@ -22,6 +22,20 @@ const MATURITY_LABELS = [
   "30y"
 ];
 
+const PRESET_OPTIONS = [
+  { label: "flat", display: "Flat", rateFunc: () => 0.04 },
+  {
+    label: "normal",
+    display: "Normal",
+    rateFunc: (m: number) => 0.02 + 0.005 * Math.log(m)
+  },
+  {
+    label: "inverted",
+    display: "Inverted",
+    rateFunc: (m: number) => 0.055 - 0.0034 * Math.log(m)
+  }
+];
+
 export default function YieldCurveInputWindow({
   curve,
   onCurveChange,
@@ -42,22 +56,8 @@ export default function YieldCurveInputWindow({
     }
   };
 
-  const handlePreset = (preset: string) => {
+  const handlePreset = (rateFunc: (m: number) => number) => {
     onPreset(0); // Reset shift to 0 when applying a preset
-    let rateFunc: (m: number) => number;
-    switch (preset) {
-      case "flat":
-        rateFunc = () => 0.04;
-        break;
-      case "normal":
-        rateFunc = (m) => 0.02 + 0.005 * Math.log(m);
-        break;
-      case "inverted":
-        rateFunc = (m) => 0.055 - 0.0034 * Math.log(m);
-        break;
-      default:
-        return;
-    }
     const newRates: number[] = maturities.map((m) => rateFunc(m), 0);
     const newCurve = new YieldCurve({
       maturities: maturities,
@@ -89,21 +89,15 @@ export default function YieldCurveInputWindow({
       <br />
       <h2>Presets</h2>
       <div className="preset-buttons">
-        <button className="preset-button" onClick={() => handlePreset("flat")}>
-          Flat
-        </button>
-        <button
-          className="preset-button"
-          onClick={() => handlePreset("normal")}
-        >
-          Normal
-        </button>
-        <button
-          className="preset-button"
-          onClick={() => handlePreset("inverted")}
-        >
-          Inverted
-        </button>
+        {PRESET_OPTIONS.map((preset) => (
+          <button
+            key={preset.label}
+            className="preset-button"
+            onClick={() => handlePreset(preset.rateFunc)}
+          >
+            {preset.display}
+          </button>
+        ))}
       </div>
     </div>
   );

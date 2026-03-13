@@ -21,7 +21,12 @@ export class YieldCurve {
     }
 
     this.maturities = props.maturities;
-    this.rates = props.rates;
+    this.rates = [...props.rates].map((r) => {
+      if (r <= 0) {
+        r = 0;
+      }
+      return r;
+    });
 
     this.curve = new Spline(this.maturities, this.rates);
   }

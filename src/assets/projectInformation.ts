@@ -2,7 +2,6 @@ import YieldCurvePlayground from "../projects/yieldCurvePlayground/YieldCurvePla
 import type { Project } from "./types";
 
 export const PROJECTS: Project[] = [
-  // Add your projects here
   {
     id: "yield",
     title: "Yield Curve Playground",

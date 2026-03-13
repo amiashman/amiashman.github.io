@@ -52,10 +52,6 @@ export default function YieldCurvePlayground() {
     <div className="yield-playground">
       <h1>Yield Curve Playground</h1>
 
-      <h2 className="yield-playground-tagline">
-        This project is currently mid-development. Check back soon for updates!
-      </h2>
-
       <div className="playground-layout">
         <div className="chart-side">
           <div className="playground-section chart-section">
@@ -128,17 +124,17 @@ export default function YieldCurvePlayground() {
             <h2>Parallel Shift</h2>
             <div className="shift-display">{shiftBps} bps</div>
             <div className="shift-slider-container">
-              <span className="shift-range negative">-300 bps</span>
+              <span className="shift-range negative">-100 bps</span>
               <input
                 type="range"
-                min={-300}
-                max={300}
+                min={-100}
+                max={100}
                 value={shiftBps}
                 onChange={(e) => {
                   handleShiftChange(parseInt(e.target.value));
                 }}
               />
-              <span className="shift-range positive">+300 bps</span>
+              <span className="shift-range positive">+100 bps</span>
             </div>
           </div>
 
