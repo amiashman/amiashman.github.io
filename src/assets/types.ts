@@ -1,5 +1,18 @@
-type MonthDate =
-  `${"January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December"} ${number}`;
+type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
+type MonthDate = `${Month} ${number}`;
 
 export type ExamProps = {
   org: string;
@@ -45,4 +58,15 @@ export type Project = {
   id: string;
   title: string;
   component: React.ComponentType;
+};
+
+type DateString = `${Month} ${number}, ${number}`;
+
+type Source = `${string}.md`;
+
+export type DvarTorahProps = {
+  id: number;
+  title: string;
+  date: DateString;
+  source: Source;
 };

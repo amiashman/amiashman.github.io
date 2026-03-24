@@ -8,6 +8,8 @@ import Projects from "./pages/Projects";
 import { cvProps } from "./assets/cvInformation";
 import ProjectDispatch from "./pages/ProjectDispatch";
 import FourZeroFour from "./pages/FourZeroFour";
+import Torah from "./pages/Torah";
+import TorahDispatch from "./pages/TorahDispatch";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/cv" element={<CV {...cvProps} />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/project/:id" element={<ProjectDispatch />} />
+        <Route path="/torah" element={<Torah />} />
+        <Route path="/torah/:id" element={<TorahDispatch />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<FourZeroFour />} />
       </Routes>

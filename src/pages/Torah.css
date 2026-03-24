@@ -1,0 +1,109 @@
+.torah-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xxl);
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-xxl);
+  min-height: 100vh;
+}
+
+.torah-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.torah-header {
+  margin-bottom: var(--space-lg);
+}
+
+.torah-header h1 {
+  margin: 0;
+}
+
+.torah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+
+.torah-card-link {
+  text-decoration: none;
+}
+
+.torah-card {
+  border: 1px solid var(--color-border-light);
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.torah-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.torah-card h2 {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--color-text);
+  font-size: var(--fs-lg);
+}
+
+.torah-card time {
+  color: var(--color-gray);
+  font-size: var(--fs-sm);
+}
+
+.torah-sidebar {
+  background: var(--color-light-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+
+@media (max-width: 976px) {
+  .torah-page {
+    grid-template-columns: 1fr;
+  }
+
+  .torah-sidebar {
+    order: -1;
+  }
+}
+
+.torah-dispatch-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--space-xxl);
+}
+
+.torah-dispatch-header h1 {
+  margin: 0;
+}
+
+.torah-dispatch-content p,
+.torah-dispatch-content li {
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.torah-dispatch-content h1,
+.torah-dispatch-content h2,
+.torah-dispatch-content h3 {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.torah-dispatch-content ul {
+  padding-left: 1.2rem;
+  margin-bottom: var(--space-md);
+}
+
+.error {
+  color: var(--color-danger);
+}
