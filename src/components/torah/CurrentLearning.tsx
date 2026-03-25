@@ -28,6 +28,23 @@ export default function CurrentLearning() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  function generateLink(item: HebcalItem): string {
+    const { category, link } = item;
+    if (category !== "parashat") {
+      return link;
+    }
+    const { leyning } = item;
+    if (!leyning) {
+      return link;
+    }
+    const dayNum = new Date().getDay();
+    const portion = leyning[dayNum + 1];
+    const baseUrl = "https://www.sefaria.org/";
+    const portionUrl = portion.split(" ").join("_").replaceAll(":", ".");
+    const fullUrl = `${baseUrl}${portionUrl}`;
+    return fullUrl;
+  }
+
   const { today, nextSaturday, fetchUrl, day } = useMemo(() => {
     const date = new Date();
     const todayStr = date.toLocaleDateString("en-CA");
@@ -69,7 +86,7 @@ export default function CurrentLearning() {
             id: index,
             title: item.leyning ? item.leyning[day + 1] : item.title,
             category: categoriesMappings[item.category] || item.category,
-            link: item.link
+            link: generateLink(item)
           }));
         setData(items);
       } catch (err) {
