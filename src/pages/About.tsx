@@ -5,9 +5,7 @@ export default function About() {
     <main className="about">
       <header className="about-header">
         <h1>About Me</h1>
-        <p className="about-subtitle">
-          Actuarial Science · Artificial Intelligence
-        </p>
+        <p className="about-subtitle">TLDR: AAA | BBB | CCC | DDD</p>
       </header>
 
       <section className="about-section">
