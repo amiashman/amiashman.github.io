@@ -10,6 +10,7 @@ import ProjectDispatch from "./pages/ProjectDispatch";
 import FourZeroFour from "./pages/FourZeroFour";
 import Torah from "./pages/Torah";
 import TorahDispatch from "./pages/TorahDispatch";
+import Growth from "./pages/Growth";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/torah/:id" element={<TorahDispatch />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<FourZeroFour />} />
+        <Route path="/growth" element={<Growth />} />
       </Routes>
     </BrowserRouter>
   );

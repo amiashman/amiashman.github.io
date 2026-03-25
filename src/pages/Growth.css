@@ -1,0 +1,32 @@
+.growth-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-xxl);
+  line-height: 1.7;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.growth-page h1 {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.growth-page p {
+  margin-bottom: var(--space-lg);
+  color: var(--color-text);
+  font-size: var(--fs-base);
+}
+
+.growth-quote {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--color-gray-medium);
+  font-style: italic;
+  white-space: nowrap;
+}

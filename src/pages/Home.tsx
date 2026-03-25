@@ -9,8 +9,8 @@ export default function Home() {
         Actuarial Science · Artificial Intelligence
       </p>
       <p className="home-intro">
-        Final-year CS student at Northeastern University with a focus on AI,
-        pursuing a career in actuarial science.
+        Final-year computer science student at Northeastern University with a
+        focus on AI, pursuing a career in actuarial science.
       </p>
       <p className="home-intro">
         This website is a work in progress. Check back soon for updates!
@@ -23,6 +23,14 @@ export default function Home() {
           Get in Touch
         </Link>
       </div>
+      <p className="home-quote">
+        "There is nothing noble in being superior to your fellow man; true
+        nobility is being superior to your former self." - Ernest Hemingway (
+        <Link to="/growth" className="home-quote-link">
+          Learn More
+        </Link>
+        )
+      </p>
     </main>
   );
 }

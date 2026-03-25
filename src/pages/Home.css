@@ -6,6 +6,7 @@
   min-height: calc(100vh - 80px);
   text-align: center;
   padding: var(--space-xxl);
+  position: relative;
 }
 
 .home h1 {
@@ -29,4 +30,20 @@
 .home-links {
   display: flex;
   gap: var(--space-lg);
+}
+
+.home-quote {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--color-gray-medium);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.home-quote-link {
+  color: var(--color-gray-medium);
+  text-decoration: underline;
 }
