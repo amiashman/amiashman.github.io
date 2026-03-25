@@ -30,11 +30,11 @@ export default function CurrentLearning() {
 
   const { today, nextSaturday, fetchUrl, day } = useMemo(() => {
     const date = new Date();
-    const todayStr = date.toISOString().split("T")[0];
+    const todayStr = date.toLocaleDateString("en-CA");
     const dayNum = date.getDay();
     const daysUntilSaturday = (6 - dayNum) % 7 || 7;
     date.setDate(date.getDate() + daysUntilSaturday);
-    const nextSaturdayStr = date.toISOString().split("T")[0];
+    const nextSaturdayStr = date.toLocaleDateString("en-CA");
 
     let url = `https://www.hebcal.com/hebcal?v=1&cfg=json&start=${todayStr}&end=${nextSaturdayStr}`;
     DAILY_LEARNINGS.forEach((learning) => {
