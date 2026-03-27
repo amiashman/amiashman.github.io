@@ -37,12 +37,11 @@ export default function PlayingPanel({
 }: PlayingPanelProps) {
   return (
     <div className="pgg-playing pgg-card">
-      <h2>Playing</h2>
       <div className="pgg-stats-row">
-        <div className="pgg-stat">Candidates: {candidatesLength}</div>
-        <div className="pgg-stat">Questions: {history.length}</div>
+        <div className="pgg-stat">Candidates Remaining: {candidatesLength}</div>
+        <div className="pgg-stat">Questions Asked: {history.length}</div>
         <div className="pgg-stat">
-          Guess:{" "}
+          Best Guess:{" "}
           {bestGuess
             ? `${bestGuess.a.toFixed(1)}x³ + ${bestGuess.b.toFixed(1)}x² + ${bestGuess.c.toFixed(1)}x + ${bestGuess.d.toFixed(1)}`
             : "-"}
@@ -53,10 +52,6 @@ export default function PlayingPanel({
       </div>
       <div className="pgg-playing-grid">
         <div className="pgg-chart-panel">
-          <div className="pgg-candidate-count">
-            {candidatesLength} candidates remaining
-          </div>
-
           <div className="pgg-chart-wrapper pgg-playing-chart">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>

@@ -76,6 +76,7 @@ export default function PolynomialGuessingGame() {
   const [bestGuess, setBestGuess] = useState<Polynomial | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [phase, setPhase] = useState<"setup" | "playing" | "solved">("setup");
+  console.log("Candidates:", candidates);
 
   const chartData = useMemo(
     () => generateChartData(userPoly, bestGuess),
@@ -135,6 +136,11 @@ export default function PolynomialGuessingGame() {
   return (
     <div className="pgg-page">
       <h1>Polynomial Guessing Game</h1>
+      <p className="pgg-description">
+        Create your secret polynomial using the sliders below. The AI will try
+        to guess it by asking yes/no questions about its properties.<br /> Can you
+        design a polynomial that stumps the machine?
+      </p>
       {phase === "setup" ? (
         <SetupPanel
           userPoly={userPoly}

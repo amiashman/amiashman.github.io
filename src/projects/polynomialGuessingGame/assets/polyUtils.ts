@@ -1,4 +1,5 @@
 import type { Polynomial, Question } from "./consts";
+import { randomnessTemperature } from "./consts";
 
 export function evaluatePolynomial(poly: Polynomial, x: number): number {
   return poly.a * x ** 3 + poly.b * x ** 2 + poly.c * x + poly.d;
@@ -38,33 +39,36 @@ export function scoreQuestion(
 export function getBestQuestion(
   candidates: Polynomial[],
   minX: number,
-  maxX: number
+  maxX: number,
+  questionNumber: number = 0
 ): Question {
   const possibleQuestions: Question[] = [];
   for (let x = minX; x <= maxX; x++) {
-    const possibleYs: number[] = [];
-    for (const poly of candidates) {
-      possibleYs.push(evaluatePolynomial(poly, x));
-    }
-    const medianY = possibleYs.sort((a, b) => a - b)[
-      Math.floor(possibleYs.length / 2)
-    ];
+    const sorted = candidates
+      .map((p) => evaluatePolynomial(p, x))
+      .sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    const medianY =
+      sorted.length % 2 === 0
+        ? (sorted[mid - 1] + sorted[mid]) / 2
+        : sorted[mid];
     possibleQuestions.push({ x, y: medianY });
   }
 
-  // Score each question
-  const scoredQuestions: Array<{ question: Question; score: number }> = [];
-  for (const question of possibleQuestions) {
-    const score = scoreQuestion(question.x, question.y, candidates);
-    scoredQuestions.push({ question, score });
-  }
+  const scoredQuestions = possibleQuestions
+    .map((question) => ({
+      question,
+      score: scoreQuestion(question.x, question.y, candidates)
+    }))
+    .sort((a, b) => b.score - a.score);
 
-  // Sort by score (descending) and pick randomly from top candidates
-  scoredQuestions.sort((a, b) => b.score - a.score);
-  const topCount = Math.max(3, Math.ceil(scoredQuestions.length * 0.15)); // Top 15% or at least 3
+  const temperature = Math.pow(randomnessTemperature, questionNumber);
+  const topCount = Math.max(
+    1,
+    Math.round(scoredQuestions.length * temperature)
+  );
   const topCandidates = scoredQuestions.slice(0, topCount);
   const randomIdx = Math.floor(Math.random() * topCandidates.length);
-
   return topCandidates[randomIdx].question;
 }
 
