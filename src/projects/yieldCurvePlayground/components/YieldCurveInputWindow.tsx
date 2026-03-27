@@ -6,6 +6,12 @@ type Props = {
   onPreset: (newShift: number) => void;
 };
 
+type PresetOption = {
+  label: string;
+  display: string;
+  rateFunc: (maturity: number) => number;
+};
+
 const MATURITY_LABELS = [
   "1m",
   "2m",
@@ -22,7 +28,7 @@ const MATURITY_LABELS = [
   "30y"
 ];
 
-const PRESET_OPTIONS = [
+const PRESET_OPTIONS: PresetOption[] = [
   { label: "flat", display: "Flat", rateFunc: () => 0.04 },
   {
     label: "normal",
