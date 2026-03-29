@@ -7,7 +7,7 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import type { HistoryEntry } from "../PolynomialGuessingGame";
+import type { HistoryEntry } from "../assets/consts";
 import type { Polynomial, Question } from "../assets/consts";
 
 interface PlayingPanelProps {

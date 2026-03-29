@@ -1,10 +1,12 @@
 import type { Polynomial, Question } from "./consts";
-import { randomnessTemperature } from "./consts";
+import { maxX, minX, randomnessTemperature } from "./consts";
 
+/* Evaluates the polynomial at a given x */
 export function evaluatePolynomial(poly: Polynomial, x: number): number {
   return poly.a * x ** 3 + poly.b * x ** 2 + poly.c * x + poly.d;
 }
 
+/* Generates all possible polynomials within the coefficient bounds */
 export function generateAllCandidatePolynomials(
   minCoeff: number,
   maxCoeff: number
@@ -22,6 +24,7 @@ export function generateAllCandidatePolynomials(
   return candidates;
 }
 
+/* Scores a question based on how well it splits the candidate polynomials */
 export function scoreQuestion(
   x: number,
   y: number,
@@ -36,6 +39,7 @@ export function scoreQuestion(
   return -Math.abs(yesCount / candidates.length - 0.5);
 }
 
+/* Chooses the best question to ask next, with some randomness */
 export function getBestQuestion(
   candidates: Polynomial[],
   minX: number,
@@ -72,6 +76,7 @@ export function getBestQuestion(
   return topCandidates[randomIdx].question;
 }
 
+/* Averages the coefficients of the remaining candidate polynomials to make a guess */
 export function getBestGuess(candidates: Polynomial[]): Polynomial {
   const n = candidates.length;
   const sum = candidates.reduce(
@@ -86,6 +91,7 @@ export function getBestGuess(candidates: Polynomial[]): Polynomial {
   return { a: sum.a / n, b: sum.b / n, c: sum.c / n, d: sum.d / n };
 }
 
+/* Filters the candidate polynomials based on the user's answer to a question */
 export function handleAnswer(
   isYes: boolean,
   question: Question,
@@ -96,4 +102,56 @@ export function handleAnswer(
     return isYes ? evalResult > question.y : evalResult <= question.y;
   });
   return newCandidates;
+}
+
+/* Formats a polynomial into a human-readable string */
+export function formatPolynomial(poly: Polynomial): string {
+  const parts: string[] = [];
+
+  const pushTerm = (coeff: number, power: number, variable: string) => {
+    if (coeff === 0) return;
+    const sign = coeff > 0 ? "+" : "-";
+    const abs = Math.abs(coeff);
+    const coef = abs === 1 && power > 0 ? "" : abs.toString();
+    const pow = power === 0 ? "" : variable;
+    parts.push(`${sign} ${coef}${pow}`.trim());
+  };
+
+  pushTerm(poly.a, 3, "x³");
+  pushTerm(poly.b, 2, "x²");
+  pushTerm(poly.c, 1, "x");
+  pushTerm(poly.d, 0, "");
+
+  if (parts.length === 0) return "f(x) = 0";
+
+  let result = "";
+  parts.forEach((p, idx) => {
+    if (idx === 0) {
+      result += p.startsWith("+") ? p.slice(2) : p;
+    } else {
+      result += " " + p;
+    }
+  });
+
+  return `f(x) = ${result}`;
+}
+
+/* Generates data for plotting the user's polynomial and the best guess */
+export function generateChartData(
+  userPoly: Polynomial,
+  guessPoly: Polynomial | null
+) {
+  const steps = 80;
+  const range = maxX - minX;
+  const dx = range / (steps - 1);
+  const data: Array<{ x: number; user: number; guess?: number }> = [];
+
+  for (let i = 0; i < steps; i++) {
+    const x = minX + dx * i;
+    const user = evaluatePolynomial(userPoly, x);
+    const guess = guessPoly ? evaluatePolynomial(guessPoly, x) : NaN;
+    data.push({ x, user, guess });
+  }
+
+  return data;
 }

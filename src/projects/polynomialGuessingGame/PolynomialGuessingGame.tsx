@@ -1,68 +1,17 @@
 import { useMemo, useState } from "react";
 import {
-  evaluatePolynomial,
   generateAllCandidatePolynomials,
   getBestQuestion,
   getBestGuess,
-  handleAnswer
+  handleAnswer,
+  formatPolynomial,
+  generateChartData
 } from "./assets/polyUtils";
 import { maxCoeff, minCoeff, minX, maxX } from "./assets/consts";
-import type { Polynomial, Question } from "./assets/consts";
+import type { Polynomial, Question, HistoryEntry } from "./assets/consts";
 import "./PolynomialGuessingGame.css";
 import SetupPanel from "./components/SetupPanel";
 import PlayingPanel from "./components/PlayingPanel";
-
-export type HistoryEntry = { question: Question; isYes: boolean };
-
-const formatPolynomial = (poly: Polynomial) => {
-  const parts: string[] = [];
-
-  const pushTerm = (coeff: number, power: number, variable: string) => {
-    if (coeff === 0) return;
-    const sign = coeff > 0 ? "+" : "-";
-    const abs = Math.abs(coeff);
-    const coef = abs === 1 && power > 0 ? "" : abs.toString();
-    const pow = power === 0 ? "" : variable;
-    parts.push(`${sign} ${coef}${pow}`.trim());
-  };
-
-  pushTerm(poly.a, 3, "x³");
-  pushTerm(poly.b, 2, "x²");
-  pushTerm(poly.c, 1, "x");
-  pushTerm(poly.d, 0, "");
-
-  if (parts.length === 0) return "f(x) = 0";
-
-  let result = "";
-  parts.forEach((p, idx) => {
-    if (idx === 0) {
-      result += p.startsWith("+") ? p.slice(2) : p;
-    } else {
-      result += " " + p;
-    }
-  });
-
-  return `f(x) = ${result}`;
-};
-
-const generateChartData = (
-  userPoly: Polynomial,
-  guessPoly: Polynomial | null
-) => {
-  const steps = 80;
-  const range = maxX - minX;
-  const dx = range / (steps - 1);
-  const data: Array<{ x: number; user: number; guess?: number }> = [];
-
-  for (let i = 0; i < steps; i++) {
-    const x = minX + dx * i;
-    const user = evaluatePolynomial(userPoly, x);
-    const guess = guessPoly ? evaluatePolynomial(guessPoly, x) : NaN;
-    data.push({ x, user, guess });
-  }
-
-  return data;
-};
 
 export default function PolynomialGuessingGame() {
   const [userPoly, setUserPoly] = useState<Polynomial>({
@@ -138,7 +87,7 @@ export default function PolynomialGuessingGame() {
       <h1>Polynomial Guessing Game</h1>
       <p className="pgg-description">
         Create your secret polynomial using the sliders below. The AI will try
-        to guess it by asking yes/no questions about its properties.<br /> Can you
+        to guess it by asking yes/no questions about its properties. Can you
         design a polynomial that stumps the machine?
       </p>
       {phase === "setup" ? (

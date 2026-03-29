@@ -1,5 +1,5 @@
-export const maxCoeff = 9;
-export const minCoeff = -9;
+export const maxCoeff = 7;
+export const minCoeff = -7;
 export const minX = -4;
 export const maxX = 4;
 
@@ -16,3 +16,5 @@ export type Question = {
   x: number;
   y: number;
 };
+
+export type HistoryEntry = { question: Question; isYes: boolean };
